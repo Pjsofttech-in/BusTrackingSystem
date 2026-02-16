@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+        h2 { color: #333; }
+        p { margin: 5px 0; }
+        .status { font-weight: bold; color: green; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Student Details</h2>
+    <p><strong>Name:</strong> <span th:text="${student.name}"></span></p>
+    <p><strong>Roll Number:</strong> <span th:text="${student.rollNumber}"></span></p>
+    <p><strong>Age:</strong> <span th:text="${student.age}"></span></p>
+    <p><strong>Blood Group:</strong> <span th:text="${student.bloodGroup}"></span></p>
+    <p><strong>Status:</strong> <span th:text="${student.status}"></span></p>
+    <hr>
+    <h3>Parent Details</h3>
+    <p><strong>Name:</strong> <span th:text="${student.parentName}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${student.parentEmail}"></span></p>
+    <p><strong>Phone:</strong> <span th:text="${student.parentPhone}"></span></p>
+</div>
+</body>
+</html>
