@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "https://pjsofttech.com")
 @RestController
 @RequestMapping("/route")
 public class RouteController {

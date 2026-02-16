@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/student")
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class StudentController {
 
     private final StudentService studentService;

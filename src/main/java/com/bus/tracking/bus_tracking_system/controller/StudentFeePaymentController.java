@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/fees")
-@CrossOrigin
+
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class StudentFeePaymentController {
 
     private final StudentFeePaymentService service;

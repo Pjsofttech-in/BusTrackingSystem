@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/driver")
-@CrossOrigin
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class DriverController {
 
     private final DriverService service;

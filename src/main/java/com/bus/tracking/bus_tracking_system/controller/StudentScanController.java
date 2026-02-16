@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@CrossOrigin(origins = "https://pjsofttech.com")
 @RestController
 @RequestMapping("/scan")
 public class StudentScanController {

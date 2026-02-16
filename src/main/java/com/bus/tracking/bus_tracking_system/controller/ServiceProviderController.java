@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/service-provider")
-@CrossOrigin
+
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class ServiceProviderController {
 
     private final ServiceProviderRepository repository;

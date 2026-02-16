@@ -8,6 +8,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/location")
+
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class LocationController {
 
     private final BusLocationService service;
