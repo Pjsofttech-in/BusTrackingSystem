@@ -10,8 +10,13 @@ public class StudentScan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long studentId;
-    private Long busId;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "bus_id")
+    private Bus bus;
 
     private LocalDateTime scannedAt;
 
@@ -20,16 +25,13 @@ public class StudentScan {
         scannedAt = LocalDateTime.now();
     }
 
-    // Getters & Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
-
-    public Long getBusId() { return busId; }
-    public void setBusId(Long busId) { this.busId = busId; }
-
+    public Student getStudent() {return student;}
+    public void setStudent(Student student) {this.student = student;}
+    public Bus getBus() {return bus;}
+    public void setBus(Bus bus) {this.bus = bus;}
     public LocalDateTime getScannedAt() { return scannedAt; }
     public void setScannedAt(LocalDateTime scannedAt) { this.scannedAt = scannedAt; }
 }

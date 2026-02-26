@@ -1,14 +1,15 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.model.BusLocation;
+import com.bus.tracking.bus_tracking_system.dto.BusLocationRequestDTO;
+import com.bus.tracking.bus_tracking_system.dto.BusLocationResponseDTO;
 import com.bus.tracking.bus_tracking_system.service.BusLocationService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/location")
-
 @CrossOrigin(origins = "https://pjsofttech.com")
 public class LocationController {
 
@@ -19,17 +20,23 @@ public class LocationController {
     }
 
     @PostMapping("/update")
-    public BusLocation updateLocation(@RequestBody BusLocation location) {
-        return service.updateLocation(location);
+    public BusLocationResponseDTO updateLocation(
+            @RequestBody BusLocationRequestDTO dto) {
+
+        return service.updateLocation(dto);
     }
 
     @GetMapping("/latest/{busId}")
-    public BusLocation getLatestLocation(@PathVariable Long busId) {
+    public BusLocationResponseDTO getLatestLocation(
+            @PathVariable Long busId) {
+
         return service.getLatestLocation(busId);
     }
 
     @GetMapping("/history/{busId}")
-    public List<BusLocation> getLocationHistory(@PathVariable Long busId) {
+    public List<BusLocationResponseDTO> getLocationHistory(
+            @PathVariable Long busId) {
+
         return service.getLocationHistory(busId);
     }
 }

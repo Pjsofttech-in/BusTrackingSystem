@@ -1,54 +1,59 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.model.ServiceProvider;
-import com.bus.tracking.bus_tracking_system.repository.ServiceProviderRepository;
+import com.bus.tracking.bus_tracking_system.dto.ServiceProviderRequestDTO;
+import com.bus.tracking.bus_tracking_system.dto.ServiceProviderResponseDTO;
+import com.bus.tracking.bus_tracking_system.service.ServiceProviderService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/service-provider")
-
 @CrossOrigin(origins = "https://pjsofttech.com")
 public class ServiceProviderController {
 
-    private final ServiceProviderRepository repository;
+    private final ServiceProviderService service;
 
-    public ServiceProviderController(ServiceProviderRepository repository) {
-        this.repository = repository;
+    public ServiceProviderController(ServiceProviderService service) {
+        this.service = service;
     }
 
-    // Add a new provider
+    // ADD
     @PostMapping("/add")
-    public ServiceProvider add(@RequestBody ServiceProvider provider) {
-        return repository.save(provider);
+    public ServiceProviderResponseDTO add(
+            @RequestBody ServiceProviderRequestDTO dto) {
+
+        return service.addServiceProvider(dto);
     }
 
-    // Get all providers
+    // GET ALL
     @GetMapping("/all")
-    public List<ServiceProvider> all() {
-        return repository.findAll();
+    public List<ServiceProviderResponseDTO> all() {
+        return service.getAllServiceProviders();
     }
 
-    // Update a provider
+    // GET BY ID
+    @GetMapping("/{id}")
+    public ServiceProviderResponseDTO getById(
+            @PathVariable Long id) {
+
+        return service.getServiceProviderById(id);
+    }
+
+    // UPDATE
     @PutMapping("/update/{id}")
-    public ServiceProvider updateProvider(@PathVariable Long id, @RequestBody ServiceProvider updated) {
-        Optional<ServiceProvider> optional = repository.findById(id);
-        if (optional.isEmpty()) return null;
+    public ServiceProviderResponseDTO updateProvider(
+            @PathVariable Long id,
+            @RequestBody ServiceProviderRequestDTO dto) {
 
-        ServiceProvider existing = optional.get();
-        existing.setName(updated.getName());
-        existing.setMobile(updated.getMobile());
-        existing.setEmail(updated.getEmail());
-
-        return repository.save(existing); // Use save to update
+        return service.updateProvider(id, dto);
     }
 
-    // Delete a provider
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public String deleteProvider(@PathVariable Long id) {
-        repository.deleteById(id); // Use deleteById
+        service.deleteProvider(id);
         return "Provider deleted";
     }
 }

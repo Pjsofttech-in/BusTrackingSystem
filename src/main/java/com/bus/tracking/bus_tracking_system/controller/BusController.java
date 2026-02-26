@@ -1,14 +1,14 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.model.Bus;
-import com.bus.tracking.bus_tracking_system.repository.BusRepository;
+import com.bus.tracking.bus_tracking_system.dto.BusRequestDTO;
+import com.bus.tracking.bus_tracking_system.dto.BusResponseDTO;
 import com.bus.tracking.bus_tracking_system.service.BusService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
 @CrossOrigin(origins = "https://pjsofttech.com")
 @RequestMapping("/bus")
 public class BusController {
@@ -19,39 +19,31 @@ public class BusController {
         this.service = service;
     }
 
+    // ADD
     @PostMapping("/add")
-    public Bus addBus(@RequestBody Bus bus) {
-        return service.addBus(bus);
+    public BusResponseDTO addBus(@RequestBody BusRequestDTO dto) {
+        return service.addBus(dto);
     }
 
+    // GET ALL
     @GetMapping("/all")
-    public List<Bus> getAllBuses() {
+    public List<BusResponseDTO> getAllBuses() {
         return service.getAllBuses();
     }
 
+    // GET BY ID
     @GetMapping("/{id}")
-    public Bus getBus(@PathVariable Long id) {
+    public BusResponseDTO getBus(@PathVariable Long id) {
         return service.getBusById(id);
     }
+
+    // DAILY RUNNING
     @GetMapping("/daily-running")
-    public List<Bus> getDailyRunning() {
+    public List<BusResponseDTO> getDailyRunning() {
         return service.getRunningBuses();
     }
 
-    @PutMapping("/update/{id}")
-    public Bus updateBus(@PathVariable Long id, @RequestBody Bus updated) {
-        Bus existing = service.getBusById(id);
-        if (existing == null) return null;
-
-        existing.setBusNumber(updated.getBusNumber());
-        existing.setCapacity(updated.getCapacity());
-        existing.setStatus(updated.getStatus());
-        existing.setAssignedDriverId(updated.getAssignedDriverId());
-        existing.setAssignedConductorId(updated.getAssignedConductorId());
-
-        return service.addBus(existing); // save update
-    }
-
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public String deleteBus(@PathVariable Long id) {
         service.deleteBus(id);

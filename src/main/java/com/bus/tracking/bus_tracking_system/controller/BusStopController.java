@@ -1,13 +1,14 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.model.BusStop;
+import com.bus.tracking.bus_tracking_system.dto.BusStopRequestDTO;
+import com.bus.tracking.bus_tracking_system.dto.BusStopResponseDTO;
 import com.bus.tracking.bus_tracking_system.service.BusStopService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
 @CrossOrigin(origins = "https://pjsofttech.com")
 @RequestMapping("/busstop")
 public class BusStopController {
@@ -18,27 +19,35 @@ public class BusStopController {
         this.service = service;
     }
 
-    // Add a new stop
+    // ADD STOP
     @PostMapping("/add")
-    public BusStop addStop(@RequestBody BusStop stop) {
-        return service.addStop(stop);
+    public BusStopResponseDTO addStop(
+            @RequestBody BusStopRequestDTO dto) {
+
+        return service.addStop(dto);
     }
 
-    // Get all stops of a bus
+    // GET STOPS BY BUS
     @GetMapping("/bus/{busId}")
-    public List<BusStop> getStopsByBus(@PathVariable Long busId) {
+    public List<BusStopResponseDTO> getStopsByBus(
+            @PathVariable Long busId) {
+
         return service.getStopsByBus(busId);
     }
 
-    // Mark stop reached
+    // MARK REACHED
     @PostMapping("/reach/{stopId}")
-    public BusStop markStopReached(@PathVariable Long stopId) {
+    public BusStopResponseDTO markStopReached(
+            @PathVariable Long stopId) {
+
         return service.markStopReached(stopId);
     }
 
-    // Count stops reached
+    // COUNT
     @GetMapping("/count/{busId}")
-    public long countStopsReached(@PathVariable Long busId) {
+    public long countStopsReached(
+            @PathVariable Long busId) {
+
         return service.countStopsReached(busId);
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BusLocationRepository extends JpaRepository<BusLocation, Long> {
 
-    List<BusLocation> findByBusIdOrderByRecordedAtAsc(Long busId);
+    List<BusLocation> findByBus_IdOrderByRecordedAtAsc(Long busId);
 
-    BusLocation findTopByBusIdOrderByRecordedAtDesc(Long busId);
+    BusLocation findTopByBus_IdOrderByRecordedAtDesc(Long busId);
 }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BusStopRepository extends JpaRepository<BusStop, Long> {
 
-    List<BusStop> findByBusIdOrderBySequenceNumberAsc(Long busId);
+    List<BusStop> findByBus_IdOrderBySequenceNumberAsc(Long busId);
 
 }

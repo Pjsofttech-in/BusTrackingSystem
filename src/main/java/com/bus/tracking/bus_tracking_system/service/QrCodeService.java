@@ -5,6 +5,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -15,8 +16,8 @@ public class QrCodeService {
 
     private final Cloudinary cloudinary;
 
-    // CHANGE this to your local PC IP
-    private final String baseUrl = "http://192.168.1.40:9090/student/scan/";
+    @Value("${app.base-url}")
+    private String baseUrl;
 
     public QrCodeService(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;

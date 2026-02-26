@@ -1,12 +1,11 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.model.Driver;
+import com.bus.tracking.bus_tracking_system.dto.*;
 import com.bus.tracking.bus_tracking_system.service.DriverService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/driver")
@@ -19,57 +18,41 @@ public class DriverController {
         this.service = service;
     }
 
+    // ADD
     @PostMapping("/add")
-    public Driver addDriver(@RequestBody Driver driver) {
-        return service.addDriver(driver);
+    public DriverResponseDTO addDriver(@RequestBody DriverRequestDTO dto) {
+        return service.addDriver(dto);
     }
 
+    // GET ALL
     @GetMapping("/all")
-    public List<Driver> getAllDrivers() {
+    public List<DriverResponseDTO> getAllDrivers() {
         return service.getAllDrivers();
     }
 
+    // GET BY ID
     @GetMapping("/{id}")
-    public Driver getDriver(@PathVariable Long id) {
+    public DriverResponseDTO getDriver(@PathVariable Long id) {
         return service.getDriverById(id);
     }
 
+    // LOGIN
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> data) {
-        Driver driver = service.login(data.get("phone"), data.get("password"));
+    public ResponseEntity<?> login(@RequestBody DriverLoginRequestDTO dto) {
 
-        if (driver == null) {
+        DriverLoginResponseDTO response = service.login(dto);
+
+        if (response == null) {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
-        driver.setPassword(null); // VERY IMPORTANT
-        return ResponseEntity.ok(driver);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update/{id}")
-    public Driver updateDriver(@PathVariable Long id, @RequestBody Driver updated) {
-        Driver existing = service.getDriverById(id);
-        if (existing == null) return null;
-
-        existing.setName(updated.getName());
-        existing.setPhone(updated.getPhone());
-        existing.setStatus(updated.getStatus());
-        existing.setLicenseNumber(updated.getLicenseNumber());
-        existing.setExperienceYears(updated.getExperienceYears());
-
-        existing.setHouseNo(updated.getHouseNo());
-        existing.setStreet(updated.getStreet());
-        existing.setCity(updated.getCity());
-        existing.setState(updated.getState());
-        existing.setPincode(updated.getPincode());
-
-        return service.addDriver(existing);
-    }
-
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public String deleteDriver(@PathVariable Long id) {
         service.deleteDriver(id);
         return "Driver deleted";
     }
-
 }
