@@ -26,6 +26,11 @@ public class BusStopController {
 
         return service.addStop(dto);
     }
+    // GET ALL STOPS
+    @GetMapping("/all")
+    public List<BusStopResponseDTO> getAllStops() {
+        return service.getAllStops();
+    }
 
     // GET STOPS BY BUS
     @GetMapping("/bus/{busId}")

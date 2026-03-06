@@ -70,8 +70,16 @@ public class BusStopService {
                 .filter(BusStop::isReached)
                 .count();
     }
-
+   // DELETE STOP
     public void deleteStop(Long id) {
         repo.deleteById(id);
+    }
+      // GET ALL STOPS
+    public List<BusStopResponseDTO> getAllStops() {
+
+        return repo.findAll()
+                .stream()
+                .map(BusStopMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
