@@ -29,7 +29,7 @@ public class MediumController {
         return mediumService.getMediumById(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteMedium/{id}")
     public String deleteMedium(@PathVariable Long id){
         mediumService.deleteMedium(id);
         return "Medium Deleted Successfully";

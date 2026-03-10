@@ -28,7 +28,7 @@ public class StudentScanController {
         return ResponseEntity.ok(scan);
     }
 
-    @GetMapping("/count/{busId}")
+    @GetMapping("/countStudents/{busId}")
     public long countStudentsInBus(
             @PathVariable Long busId) {
 

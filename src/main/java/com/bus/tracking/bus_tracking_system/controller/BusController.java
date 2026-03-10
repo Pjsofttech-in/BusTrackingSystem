@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "https://pjsofttech.com")
-@RequestMapping("/bus")
+//@RequestMapping("/bus")
 public class BusController {
 
     private final BusService service;
@@ -20,19 +20,19 @@ public class BusController {
     }
 
     // ADD
-    @PostMapping("/add")
+    @PostMapping("/addBus")
     public BusResponseDTO addBus(@RequestBody BusRequestDTO dto) {
         return service.addBus(dto);
     }
 
     // GET ALL
-    @GetMapping("/all")
+    @GetMapping("/getALLBuses")
     public List<BusResponseDTO> getAllBuses() {
         return service.getAllBuses();
     }
 
     // GET BY ID
-    @GetMapping("/{id}")
+    @GetMapping("getBusById/{id}")
     public BusResponseDTO getBus(@PathVariable Long id) {
         return service.getBusById(id);
     }
@@ -44,7 +44,7 @@ public class BusController {
     }
 
     // DELETE
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteBus/{id}")
     public String deleteBus(@PathVariable Long id) {
         service.deleteBus(id);
         return "Bus deleted";

@@ -11,8 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DivisionEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String divisionName;
     private Long divisionId;
+
+    private String divisionName;
+
 }

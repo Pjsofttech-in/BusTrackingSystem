@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "https://pjsofttech.com")
-@RequestMapping("/busstop")
+//@RequestMapping("/busstop")
 public class BusStopController {
 
     private final BusStopService service;
@@ -20,20 +20,20 @@ public class BusStopController {
     }
 
     // ADD STOP
-    @PostMapping("/add")
+    @PostMapping("/addBusStop")
     public BusStopResponseDTO addStop(
             @RequestBody BusStopRequestDTO dto) {
 
         return service.addStop(dto);
     }
     // GET ALL STOPS
-    @GetMapping("/all")
+    @GetMapping("/getAllStops")
     public List<BusStopResponseDTO> getAllStops() {
         return service.getAllStops();
     }
 
     // GET STOPS BY BUS
-    @GetMapping("/bus/{busId}")
+    @GetMapping("/getBusStopByBus/{busId}")
     public List<BusStopResponseDTO> getStopsByBus(
             @PathVariable Long busId) {
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/student")
+//@RequestMapping("/student")
 @CrossOrigin(origins = "https://pjsofttech.com")
 public class StudentController {
 
@@ -27,7 +27,7 @@ public class StudentController {
     }
 
     // ADD STUDENT (API)
-    @PostMapping("/add")
+    @PostMapping("/addStudent")
     @ResponseBody
     public StudentResponseDTO addStudent(
             @RequestBody StudentRequestDTO dto) throws Exception {
@@ -36,7 +36,7 @@ public class StudentController {
     }
 
     // SCAN QR (HTML)
-    @GetMapping("/scan/{id}")
+    @GetMapping("/StudentScan/{id}")
     public String scanStudentQr(@PathVariable Long id, Model model) {
 
         Student student = studentService.getStudentEntity(id);
@@ -64,7 +64,7 @@ public class StudentController {
     }
 
     // UPDATE
-    @PutMapping("/update/{id}")
+    @PutMapping("/updateStudent/{id}")
     @ResponseBody
     public StudentResponseDTO updateStudent(
             @PathVariable Long id,
@@ -74,7 +74,7 @@ public class StudentController {
     }
 
     // DELETE
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteStudent/{id}")
     @ResponseBody
     public String deleteStudent(@PathVariable Long id) {
 

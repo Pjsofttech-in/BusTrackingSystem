@@ -39,7 +39,7 @@ public class RouteController {
         return service.updateRoute(id, dto);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteRoute/{id}")
     public String deleteRoute(@PathVariable Long id) {
         service.deleteRoute(id);
         return "Route deleted";
