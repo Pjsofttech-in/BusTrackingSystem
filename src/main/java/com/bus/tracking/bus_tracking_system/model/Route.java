@@ -21,6 +21,7 @@ public class Route {
     private double totalDistanceKm;
     private int estimatedTimeMin;
     private String status;
+    private String busStop;
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;

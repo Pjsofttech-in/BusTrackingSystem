@@ -5,8 +5,10 @@ public class ServiceProviderRequestDTO {
     private String name;
     private String mobile;
     private String email;
-    private String address;
-
+    //private String address;
+    private String state;
+    private String city;
+    private String pincode;
     // getters and setters
 
     public String getName() {
@@ -33,11 +35,11 @@ public class ServiceProviderRequestDTO {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 }

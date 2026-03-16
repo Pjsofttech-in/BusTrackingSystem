@@ -9,6 +9,7 @@ public class RouteResponseDTO {
     private double totalDistanceKm;
     private int estimatedTimeMin;
     private String status;
+    private String busStop;
 
     // getters and setters
 
@@ -67,4 +68,7 @@ public class RouteResponseDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getBusStop() {return busStop;
+    }public void setBusStop(String busStop) {this.busStop = busStop;}
 }
