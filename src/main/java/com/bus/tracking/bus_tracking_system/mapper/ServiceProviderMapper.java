@@ -14,7 +14,7 @@ public class ServiceProviderMapper {
         provider.setName(dto.getName());
         provider.setMobile(dto.getMobile());
         provider.setEmail(dto.getEmail());
-        provider.setAddress(dto.getAddress());
+       // provider.setAddress(dto.getAddress());
 
         return provider;
     }
@@ -28,7 +28,7 @@ public class ServiceProviderMapper {
         dto.setName(provider.getName());
         dto.setMobile(provider.getMobile());
         dto.setEmail(provider.getEmail());
-        dto.setAddress(provider.getAddress());
+       // dto.setAddress(provider.getAddress());
 
         return dto;
     }

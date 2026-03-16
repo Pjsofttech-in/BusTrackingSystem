@@ -1,16 +1,19 @@
 package com.bus.tracking.bus_tracking_system.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.Date;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
-import lombok.Getter;
-import lombok.Setter;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConductorResponseDTO {
-    @Getter
-    @Setter
+
     private Long id;
     private String name;
     private String phone;
@@ -25,8 +28,5 @@ public class ConductorResponseDTO {
     private String city;
     private String state;
     private String pincode;
-
-
-
 
 }

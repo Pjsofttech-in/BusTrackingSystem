@@ -35,6 +35,15 @@ public class ConductorMapper {
         dto.setPhone(conductor.getPhone());
         dto.setEmployeeId(conductor.getEmployeeId());
         dto.setStatus(conductor.getStatus());
+        dto.setJoiningDate(conductor.getJoiningDate());
+        dto.setTerminateDate(conductor.getTerminateDate());
+        dto.setLicenseExpiryDate(conductor.getLicenseExpiryDate());
+        dto.setHouseNo(conductor.getHouseNo());
+        dto.setStreet(conductor.getStreet());
+        dto.setCity(conductor.getCity());
+        dto.setState(conductor.getState());
+        dto.setPincode(conductor.getPincode());
+
 
         return dto;
     }
