@@ -1,52 +1,32 @@
 package com.bus.tracking.bus_tracking_system.dto;
 
-public class ConductorResponseDTO {
+import java.time.LocalDate;
+import java.util.Date;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
+import lombok.Getter;
+import lombok.Setter;
+
+public class ConductorResponseDTO {
+    @Getter
+    @Setter
     private Long id;
     private String name;
     private String phone;
     private String employeeId;
     private String status;
+    private LocalDate joiningDate;
+    private LocalDate terminateDate;
+    private Date licenseExpiryDate;
 
-    // getters and setters
+    private String houseNo;
+    private String street;
+    private String city;
+    private String state;
+    private String pincode;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
