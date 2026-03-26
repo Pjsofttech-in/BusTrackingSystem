@@ -10,15 +10,18 @@ public class DriverMapper {
     // RequestDTO → Entity
     public static Driver toEntity(DriverRequestDTO dto) {
 
+        if (dto == null) return null;
+
         Driver driver = new Driver();
 
         driver.setName(dto.getName());
         driver.setPhone(dto.getPhone());
-        driver.setPassword(dto.getPassword()); // Will be encrypted in service
+        driver.setPassword(dto.getPassword()); // encrypt in service
         driver.setLicenseNumber(dto.getLicenseNumber());
         driver.setExperienceYears(dto.getExperienceYears());
         driver.setStatus(dto.getStatus());
 
+        // Address
         driver.setHouseNo(dto.getHouseNo());
         driver.setStreet(dto.getStreet());
         driver.setCity(dto.getCity());
@@ -31,6 +34,8 @@ public class DriverMapper {
     // Entity → ResponseDTO
     public static DriverResponseDTO toDTO(Driver driver) {
 
+        if (driver == null) return null;
+
         DriverResponseDTO dto = new DriverResponseDTO();
 
         dto.setId(driver.getId());
@@ -40,11 +45,26 @@ public class DriverMapper {
         dto.setExperienceYears(driver.getExperienceYears());
         dto.setStatus(driver.getStatus());
 
+        //  HOUSE /CITY AND ALL
+        dto.setHouseNo(driver.getHouseNo());
+        dto.setStreet(driver.getStreet());
+        dto.setCity(driver.getCity());
+        dto.setState(driver.getState());
+        dto.setPincode(driver.getPincode());
+
+        // Extra fields
+        dto.setLicenseExpiryDate(driver.getLicenseExpiryDate());
+        dto.setJoiningDate(driver.getJoiningDate());
+        dto.setTerminateDate(driver.getTerminateDate());
+        dto.setCreatedAt(driver.getCreatedAt());
+
         return dto;
     }
 
     // Entity → LoginResponseDTO
     public static DriverLoginResponseDTO toLoginDTO(Driver driver) {
+
+        if (driver == null) return null;
 
         DriverLoginResponseDTO dto = new DriverLoginResponseDTO();
 

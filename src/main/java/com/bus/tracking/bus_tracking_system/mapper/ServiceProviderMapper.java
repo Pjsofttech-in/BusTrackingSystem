@@ -14,7 +14,11 @@ public class ServiceProviderMapper {
         provider.setName(dto.getName());
         provider.setMobile(dto.getMobile());
         provider.setEmail(dto.getEmail());
-       // provider.setAddress(dto.getAddress());
+
+        // STATE/CITY/PINCODE
+        provider.setState(dto.getState());
+        provider.setCity(dto.getCity());
+        provider.setPincode(dto.getPincode());
 
         return provider;
     }
@@ -22,13 +26,19 @@ public class ServiceProviderMapper {
     // Entity → DTO
     public static ServiceProviderResponseDTO toDTO(ServiceProvider provider) {
 
+        if (provider == null) return null;
+
         ServiceProviderResponseDTO dto = new ServiceProviderResponseDTO();
 
         dto.setId(provider.getId());
         dto.setName(provider.getName());
         dto.setMobile(provider.getMobile());
         dto.setEmail(provider.getEmail());
-       // dto.setAddress(provider.getAddress());
+
+        // STATE/CITY/PINCODE
+        dto.setState(provider.getState());
+        dto.setCity(provider.getCity());
+        dto.setPincode(provider.getPincode());
 
         return dto;
     }
