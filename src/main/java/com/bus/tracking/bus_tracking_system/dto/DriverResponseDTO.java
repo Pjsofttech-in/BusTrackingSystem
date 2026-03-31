@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -25,8 +24,8 @@ public class DriverResponseDTO {
     private String state;
     private String pincode;
 
-    // Extra fields from Entity
-    private Date licenseExpiryDate;
+    // Extra fields
+    private LocalDate licenseExpiryDate;
     private LocalDate joiningDate;
     private LocalDate terminateDate;
     private LocalDateTime createdAt;

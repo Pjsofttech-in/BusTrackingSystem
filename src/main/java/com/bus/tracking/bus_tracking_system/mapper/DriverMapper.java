@@ -21,6 +21,11 @@ public class DriverMapper {
         driver.setExperienceYears(dto.getExperienceYears());
         driver.setStatus(dto.getStatus());
 
+        // ✅ NEW FIELDS (important)
+        driver.setLicenseExpiryDate(dto.getLicenseExpiryDate());
+        driver.setJoiningDate(dto.getJoiningDate());
+        driver.setTerminateDate(dto.getTerminateDate());
+
         // Address
         driver.setHouseNo(dto.getHouseNo());
         driver.setStreet(dto.getStreet());
@@ -45,7 +50,7 @@ public class DriverMapper {
         dto.setExperienceYears(driver.getExperienceYears());
         dto.setStatus(driver.getStatus());
 
-        //  HOUSE /CITY AND ALL
+        // Address
         dto.setHouseNo(driver.getHouseNo());
         dto.setStreet(driver.getStreet());
         dto.setCity(driver.getCity());

@@ -18,8 +18,8 @@ public class StudentRequestDTO {
     private String parentPhone;
     private String parentEmail;
 
-    private Integer studentClass;
-    private Integer division;
+    private String studentClass;
+    private String division;
     private String medium;
     private LocalDate academicYear;
 

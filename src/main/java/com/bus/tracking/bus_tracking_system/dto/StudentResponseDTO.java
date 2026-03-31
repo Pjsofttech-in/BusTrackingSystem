@@ -23,8 +23,8 @@ public class StudentResponseDTO {
     private String parentEmail;
 
     // Academic Details
-    private Integer studentClass;
-    private Integer division;
+    private String studentClass;
+    private String division;
     private String medium;
     private LocalDate academicYear;
 

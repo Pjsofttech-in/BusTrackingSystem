@@ -34,8 +34,8 @@ public class Student {
     private String bloodGroup;
     private Integer age;
 
-    private Integer studentClass;
-    private Integer division;
+    private String studentClass;
+    private String division;
 
    private String medium;
     private LocalDate academicYear;
