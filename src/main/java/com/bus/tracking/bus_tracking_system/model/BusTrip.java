@@ -25,6 +25,10 @@ public class BusTrip {
     private Route route;
 
     @ManyToOne
+    @JoinColumn(name ="conductor_id")
+    private Conductor conductor;
+
+    @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
 

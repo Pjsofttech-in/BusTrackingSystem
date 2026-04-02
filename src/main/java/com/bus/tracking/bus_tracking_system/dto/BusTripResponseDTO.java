@@ -20,6 +20,9 @@ public class BusTripResponseDTO {
     private Long driverId;
     private String driverName;
 
+    private Long conductorId;
+    private String conductorName;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 

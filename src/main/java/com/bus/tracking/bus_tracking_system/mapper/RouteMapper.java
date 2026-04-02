@@ -1,15 +1,14 @@
 package com.bus.tracking.bus_tracking_system.mapper;
 
-import com.bus.tracking.bus_tracking_system.dto.RouteRequestDTO;
-import com.bus.tracking.bus_tracking_system.dto.RouteResponseDTO;
-import com.bus.tracking.bus_tracking_system.model.Route;
+import com.bus.tracking.bus_tracking_system.dto.*;
+import com.bus.tracking.bus_tracking_system.model.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RouteMapper {
 
-    // RequestDTO → Entity
     public static Route toEntity(RouteRequestDTO dto) {
-
-        if (dto == null) return null;
 
         Route route = new Route();
 
@@ -22,32 +21,45 @@ public class RouteMapper {
         route.setEstimatedTimeMin(dto.getEstimatedTimeMin());
         route.setStatus(dto.getStatus());
 
-        // ✅ IMPORTANT (you missed this)
-        route.setBusStop(dto.getBusStop());
+        if (dto.getStops() != null) {
+            List<RouteStop> stops = dto.getStops().stream().map(s -> {
+                RouteStop stop = new RouteStop();
+                stop.setStopName(s.getStopName());
+                stop.setArrivalTime(s.getArrivalTime());
+                stop.setRoute(route);
+                return stop;
+            }).collect(Collectors.toList());
+
+            route.setStops(stops);
+        }
 
         return route;
     }
 
-    // Entity → ResponseDTO
     public static RouteResponseDTO toDTO(Route route) {
 
         RouteResponseDTO dto = new RouteResponseDTO();
 
         dto.setId(route.getId());
         dto.setRouteName(route.getRouteName());
-
-        //TIME
         dto.setStartTime(route.getStartTime());
         dto.setStopTime(route.getStopTime());
-
         dto.setStartPoint(route.getStartPoint());
         dto.setEndPoint(route.getEndPoint());
         dto.setTotalDistanceKm(route.getTotalDistanceKm());
         dto.setEstimatedTimeMin(route.getEstimatedTimeMin());
         dto.setStatus(route.getStatus());
 
-        // BUS STOP IMPORTANT
-        dto.setBusStop(route.getBusStop());
+        if (route.getStops() != null) {
+            List<RouteStopDTO> stops = route.getStops().stream().map(s -> {
+                RouteStopDTO stopDTO = new RouteStopDTO();
+                stopDTO.setStopName(s.getStopName());
+                stopDTO.setArrivalTime(s.getArrivalTime());
+                return stopDTO;
+            }).collect(Collectors.toList());
+
+            dto.setStops(stops);
+        }
 
         return dto;
     }

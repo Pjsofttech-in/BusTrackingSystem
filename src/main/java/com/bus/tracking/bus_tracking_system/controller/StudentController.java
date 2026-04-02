@@ -6,13 +6,11 @@ import com.bus.tracking.bus_tracking_system.service.EmailService;
 import com.bus.tracking.bus_tracking_system.service.StudentService;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 //@RequestMapping("/student")
 @CrossOrigin(origins = "https://pjsofttech.com")
 public class StudentController {
@@ -26,22 +24,78 @@ public class StudentController {
         this.emailService = emailService;
     }
 
-    // ADD STUDENT (API)
-    @PostMapping("/addStudent")
-    @ResponseBody
-    public StudentResponseDTO addStudent(
+    //  CREATE STUDENT
+    @PostMapping("/createStudent")
+    public ResponseEntity<StudentResponseDTO> createStudent(
             @RequestBody StudentRequestDTO dto) throws Exception {
 
-        return studentService.addStudent(dto);
+        return ResponseEntity.ok(studentService.addStudent(dto));
     }
 
-    // SCAN QR (HTML)
-    @GetMapping("/StudentScan/{id}")
-    public String scanStudentQr(@PathVariable Long id, Model model) {
+    //  GET ALL STUDENTS
+    @GetMapping("/getAllStudents")
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudents() {
+
+        return ResponseEntity.ok(studentService.getAllStudents());
+    }
+
+    //  GET STUDENT BY ID
+    @GetMapping("/getStudent/{id}")
+    public ResponseEntity<StudentResponseDTO> getStudentById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(studentService.getStudentById(id));
+    }
+
+    //  UPDATE STUDENT
+    @PutMapping("/updateStudent/{id}")
+    public ResponseEntity<StudentResponseDTO> updateStudent(
+            @PathVariable Long id,
+            @RequestBody StudentRequestDTO dto) throws Exception {
+
+        return ResponseEntity.ok(studentService.updateStudent(id, dto));
+    }
+
+    // DELETE STUDENT
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
 
         Student student = studentService.getStudentEntity(id);
 
-        if (student != null && student.getParentEmail() != null) {
+        if (student == null) {
+            return ResponseEntity.badRequest().body("Student not found");
+        }
+
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully");
+    }
+
+    // GET ACADEMIC INFO BY ID
+    @GetMapping("/getAcademic/{id}")
+    public ResponseEntity<StudentAcademicInfoDTO> getAcademicInfo(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(studentService.getAcademicInfo(id));
+    }
+
+    //  GET ALL ACADEMIC INFO
+    @GetMapping("/getAllAcademic")
+    public ResponseEntity<List<StudentAcademicInfoDTO>> getAllAcademicInfo() {
+
+        return ResponseEntity.ok(studentService.getAllAcademicInfo());
+    }
+
+    // SCAN STUDENT QR + SEND EMAIL
+    @GetMapping("/scanStudent/{id}")
+    public ResponseEntity<String> scanStudent(@PathVariable Long id) {
+
+        Student student = studentService.getStudentEntity(id);
+
+        if (student == null) {
+            return ResponseEntity.badRequest().body("Student not found");
+        }
+
+        if (student.getParentEmail() != null) {
 
             String subject = "Your Child is on the Bus";
 
@@ -56,56 +110,8 @@ public class StudentController {
                     subject,
                     body
             );
-
-            model.addAttribute("student", student);
         }
 
-        return "student-details";
-    }
-
-    // UPDATE
-    @PutMapping("/updateStudent/{id}")
-    @ResponseBody
-    public StudentResponseDTO updateStudent(
-            @PathVariable Long id,
-            @RequestBody StudentRequestDTO dto) throws Exception {
-
-        return studentService.updateStudent(id, dto);
-    }
-
-    // DELETE
-    @DeleteMapping("/deleteStudent/{id}")
-    @ResponseBody
-    public String deleteStudent(@PathVariable Long id) {
-
-        Student existing = studentService.getStudentEntity(id);
-
-        if (existing == null) {
-            return "Student not found";
-        }
-
-        studentService.deleteStudent(id);
-        return "Deleted successfully";
-    }
-
-    // GET ALL
-    @GetMapping("/all")
-    @ResponseBody
-    public ResponseEntity<List<StudentResponseDTO>> getAllStudents() {
-
-        return ResponseEntity.ok(studentService.getAllStudents());
-    }
-
-    // ACADEMIC INFO (unchanged)
-    @GetMapping("/academic/{id}")
-    @ResponseBody
-    public StudentAcademicInfoDTO getAcademicInfo(@PathVariable Long id) {
-        return studentService.getAcademicInfo(id);
-    }
-
-    @GetMapping("/academic/all")
-    @ResponseBody
-    public List<StudentAcademicInfoDTO> getAllAcademicInfo() {
-        return studentService.getAllAcademicInfo();
+        return ResponseEntity.ok("QR scanned & email sent");
     }
 }

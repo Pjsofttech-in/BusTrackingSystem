@@ -12,6 +12,7 @@ public class BusTripRequestDTO {
     private Long busId;
     private Long routeId;
     private Long driverId;
+    private Long conductorId;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;

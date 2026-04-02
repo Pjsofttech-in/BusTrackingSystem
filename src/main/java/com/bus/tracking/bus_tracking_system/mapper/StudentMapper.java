@@ -6,11 +6,18 @@ import com.bus.tracking.bus_tracking_system.model.Student;
 
 public class StudentMapper {
 
-    // RequestDTO → Entity
+    // CREATE
     public static Student toEntity(StudentRequestDTO dto) {
 
-
         Student student = new Student();
+
+        updateEntity(student, dto); // reuse
+
+        return student;
+    }
+
+    //  UPDATE METHOD
+    public static void updateEntity(Student student, StudentRequestDTO dto) {
 
         // Basic Info
         student.setName(dto.getName());
@@ -24,19 +31,15 @@ public class StudentMapper {
         student.setParentPhone(dto.getParentPhone());
         student.setParentEmail(dto.getParentEmail());
 
-        // Academic Details
+        //  Academic Details (FIXED)
         student.setStudentClass(dto.getStudentClass());
         student.setDivision(dto.getDivision());
         student.setMedium(dto.getMedium());
         student.setAcademicYear(dto.getAcademicYear());
-
-        return student;
     }
 
-    // Entity → ResponseDTO
+    // RESPONSE
     public static StudentResponseDTO toDTO(Student student) {
-
-
 
         StudentResponseDTO dto = new StudentResponseDTO();
 
@@ -59,7 +62,7 @@ public class StudentMapper {
         dto.setMedium(student.getMedium());
         dto.setAcademicYear(student.getAcademicYear());
 
-        // Bus/System Fields
+        // System Fields
         dto.setQrImageUrl(student.getQrImageUrl());
         dto.setInBus(student.isInBus());
         dto.setStatus(student.getStatus());

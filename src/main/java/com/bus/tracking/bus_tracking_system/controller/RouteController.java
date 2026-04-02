@@ -1,47 +1,42 @@
 package com.bus.tracking.bus_tracking_system.controller;
 
-import com.bus.tracking.bus_tracking_system.dto.RouteRequestDTO;
-import com.bus.tracking.bus_tracking_system.dto.RouteResponseDTO;
+import com.bus.tracking.bus_tracking_system.dto.*;
 import com.bus.tracking.bus_tracking_system.service.RouteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://pjsofttech.com")
 @RestController
-//@RequestMapping("/route")
+@RequestMapping("/api/routes")
+@CrossOrigin(origins = "https://pjsofttech.com")
+@RequiredArgsConstructor
 public class RouteController {
 
-    private final RouteService service;
+    private final RouteService routeService;
 
-    public RouteController(RouteService service) {
-        this.service = service;
+    //  CREATE
+    @PostMapping
+    public RouteResponseDTO save(@RequestBody RouteRequestDTO dto) {
+        return routeService.saveRoute(dto);
     }
 
-    @PostMapping("/addRoute")
-    public RouteResponseDTO addRoute(@RequestBody RouteRequestDTO dto) {
-        return service.addRoute(dto);
+    //  GET BY ID
+    @GetMapping("/{id}")
+    public RouteResponseDTO getById(@PathVariable Long id) {
+        return routeService.getRoute(id);
     }
 
-    @GetMapping("/getAllRoutes")
-    public List<RouteResponseDTO> getAllRoutes() {
-        return service.getAllRoutes();
+    //  GET ALL
+    @GetMapping
+    public List<RouteResponseDTO> getAll() {
+        return routeService.getAllRoutes();
     }
 
-    @GetMapping("/getRouteById/{id}")
-    public RouteResponseDTO getRoute(@PathVariable Long id) {
-        return service.getRouteById(id);
-    }
-
-    @PutMapping("/update/{id}")
-    public RouteResponseDTO updateRoute(@PathVariable Long id,
-                                        @RequestBody RouteRequestDTO dto) {
-        return service.updateRoute(id, dto);
-    }
-
-    @DeleteMapping("/deleteRoute/{id}")
-    public String deleteRoute(@PathVariable Long id) {
-        service.deleteRoute(id);
-        return "Route deleted";
+    //  DELETE
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        routeService.deleteRoute(id);
+        return "Route deleted successfully";
     }
 }

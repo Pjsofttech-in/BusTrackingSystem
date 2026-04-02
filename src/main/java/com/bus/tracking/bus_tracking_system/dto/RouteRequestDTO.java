@@ -2,6 +2,7 @@ package com.bus.tracking.bus_tracking_system.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +16,7 @@ public class RouteRequestDTO {
     private double totalDistanceKm;
     private int estimatedTimeMin;
     private String status;
-    private String busStop;
+
+    //  Stops list
+    private List<RouteStopDTO> stops;
 }
