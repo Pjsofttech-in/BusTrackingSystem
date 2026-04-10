@@ -20,6 +20,7 @@ public class Driver {
     private String phone;
     private String password;
     private String licenseNumber;
+    private String employeeId;
 
     private LocalDate licenseExpiryDate;
     private int experienceYears;

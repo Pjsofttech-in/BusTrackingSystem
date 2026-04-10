@@ -14,6 +14,7 @@ public class DriverResponseDTO {
     private String name;
     private String phone;
     private String licenseNumber;
+    private String employeeId;
     private int experienceYears;
     private String status;
 

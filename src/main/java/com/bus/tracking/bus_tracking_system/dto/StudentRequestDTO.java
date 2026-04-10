@@ -21,6 +21,6 @@ public class StudentRequestDTO {
     private String studentClass;
     private String division;
     private String medium;
-    private LocalDate academicYear;
+    private String academicYear;
 
 }

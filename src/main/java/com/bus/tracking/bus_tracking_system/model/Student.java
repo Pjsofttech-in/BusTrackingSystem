@@ -38,7 +38,7 @@ public class Student {
     private String division;
 
    private String medium;
-    private LocalDate academicYear;
+    private String academicYear;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentFeePayment> payments;

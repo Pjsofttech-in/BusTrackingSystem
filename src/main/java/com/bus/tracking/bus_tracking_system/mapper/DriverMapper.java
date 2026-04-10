@@ -47,8 +47,10 @@ public class DriverMapper {
         dto.setName(driver.getName());
         dto.setPhone(driver.getPhone());
         dto.setLicenseNumber(driver.getLicenseNumber());
+        dto.setEmployeeId(driver.getEmployeeId());
         dto.setExperienceYears(driver.getExperienceYears());
         dto.setStatus(driver.getStatus());
+
 
         // Address
         dto.setHouseNo(driver.getHouseNo());

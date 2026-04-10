@@ -26,7 +26,7 @@ public class StudentResponseDTO {
     private String studentClass;
     private String division;
     private String medium;
-    private LocalDate academicYear;
+    private String academicYear;
 
     // Bus/System Fields
     private String qrImageUrl;

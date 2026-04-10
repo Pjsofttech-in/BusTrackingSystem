@@ -15,6 +15,7 @@ public class DriverRequestDTO {
     private String licenseNumber;
     private int experienceYears;
     private String status;
+    private String employeeId;
 
     private LocalDate licenseExpiryDate; //added
     private LocalDate joiningDate;       // added
