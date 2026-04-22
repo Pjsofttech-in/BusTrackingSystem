@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 //@RequestMapping("/api/classes")
+@CrossOrigin(origins = "https://pjsofttech.com")
 public class ClassGenericController {
 
     private final ClassGenericService service;
