@@ -65,14 +65,6 @@ public class RouteStopService {
         return RouteStopMapper.toDTO(updated);
     }
 
-    //GET STEPS BY ROUTE
-    public List<RouteStopDTO> getStopsByRoute(Long routeId){
-
-        return routeStopRepository.findByRouteId(routeId)
-                .stream()
-                .map(RouteStopMapper::toDTO)
-                .toList();
-    }
 
     //  DELETE STOP
     public void deleteStop(Long id) {
