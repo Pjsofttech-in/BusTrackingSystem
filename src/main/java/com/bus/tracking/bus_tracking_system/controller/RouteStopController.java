@@ -44,12 +44,7 @@ public class RouteStopController {
     }
 
     //GET STOP BY ROUTE
-    @GetMapping("/route/{routeId}")
-    public List<RouteStopDTO> getStopsByRoute(
-            @PathVariable Long routeId){
 
-        return service.getStopsByRoute(routeId);
-    }
 
     //  DELETE
     @DeleteMapping("/{id}")
