@@ -43,6 +43,15 @@ public class BusController {
         return service.getRunningBuses();
     }
 
+    //UPDATE
+    @PutMapping("/updateBus/{id}")
+    public BusResponseDTO updateBus(
+            @PathVariable Long id,
+            @RequestBody BusRequestDTO dto) {
+
+        return service.updateBus(id, dto);
+    }
+
     // DELETE
     @DeleteMapping("/deleteBus/{id}")
     public String deleteBus(@PathVariable Long id) {

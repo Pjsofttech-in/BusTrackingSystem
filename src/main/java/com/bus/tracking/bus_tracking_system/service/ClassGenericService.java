@@ -29,6 +29,15 @@ public class ClassGenericService {
                 .orElseThrow(() -> new RuntimeException("Class not found with id: " + id));
     }
 
+    public ClassGeneric updateClass(Long id, ClassGeneric updatedClass) {
+
+        ClassGeneric existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Class not found"));
+
+        existing.setName(updatedClass.getName());
+
+        return repository.save(existing);
+    }
 
     public void delete(Long id) {
         if (!repository.existsById(id)) {

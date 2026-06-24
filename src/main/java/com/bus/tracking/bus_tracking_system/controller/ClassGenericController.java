@@ -29,7 +29,18 @@ public class ClassGenericController {
         return service.getAll();
     }
 
+    //GET BY ID
+    @GetMapping("/getClass/{id}")
+    public ClassGeneric getClass(@PathVariable Long id) {
+        return service.getById(id);
+    }
 
+    //UPDATE
+    @PutMapping("/updateClass/{id}")
+    public ClassGeneric updateClass(@PathVariable Long id,
+                                    @RequestBody ClassGeneric classGeneric) {
+        return service.updateClass(id, classGeneric);
+    }
 
     // DELETE
     @DeleteMapping("deleteClass/{id}")

@@ -68,6 +68,24 @@ public class BusService {
                 .collect(Collectors.toList());
     }
 
+    //UPDATE
+    public BusResponseDTO updateBus(Long id,
+                                    BusRequestDTO dto) {
+
+        Bus bus = busRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Bus not found"));
+
+        bus.setBusNumber(dto.getBusNumber());
+        bus.setBusType(dto.getBusType());
+        bus.setCapacity(dto.getCapacity());
+        bus.setStatus(dto.getStatus());
+
+        return BusMapper.toDTO(
+                busRepository.save(bus)
+        );
+    }
+
     // DELETE
     public void deleteBus(Long id) {
         busRepository.deleteById(id);

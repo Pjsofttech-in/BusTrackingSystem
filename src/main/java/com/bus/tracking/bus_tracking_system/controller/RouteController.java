@@ -33,6 +33,13 @@ public class RouteController {
         return routeService.getAllRoutes();
     }
 
+    //UPDATE
+    @PutMapping("/{id}")
+    public RouteResponseDTO update(@PathVariable Long id,
+                                   @RequestBody RouteRequestDTO dto) {
+        return routeService.updateRoute(id, dto);
+    }
+
     //  DELETE
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {

@@ -27,6 +27,15 @@ public class MediumService {
         return medium.orElse(null);
     }
 
+    public MediumEntity updateMedium(Long id, MediumEntity updatedMedium) {
+        MediumEntity medium = mediumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medium not found"));
+
+        medium.setMediumName(updatedMedium.getMediumName());
+
+        return mediumRepository.save(medium);
+    }
+
     public void deleteMedium(Long id){
         mediumRepository.deleteById(id);
     }
