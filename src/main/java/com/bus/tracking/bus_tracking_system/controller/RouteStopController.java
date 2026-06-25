@@ -43,7 +43,6 @@ public class RouteStopController {
         return service.updateStop(id, dto);
     }
 
-    //GET STOP BY ROUTE
 
 
     //  DELETE
