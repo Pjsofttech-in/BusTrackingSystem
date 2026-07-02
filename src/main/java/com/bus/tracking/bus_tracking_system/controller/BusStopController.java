@@ -40,6 +40,23 @@ public class BusStopController {
         return service.getStopsByBus(busId);
     }
 
+    // GET STOP BY ID
+    @GetMapping("/getBusStop/{id}")
+    public BusStopResponseDTO getStopById(
+            @PathVariable Long id) {
+
+        return service.getStopById(id);
+    }
+
+    // UPDATE STOP
+    @PutMapping("/updateBusStop/{id}")
+    public BusStopResponseDTO updateStop(
+            @PathVariable Long id,
+            @RequestBody BusStopRequestDTO dto) {
+
+        return service.updateStop(id, dto);
+    }
+
     // MARK REACHED
     @PostMapping("/reach/{stopId}")
     public BusStopResponseDTO markStopReached(

@@ -23,6 +23,10 @@ public class BusSupplierService {
     // CREATE
     public BusSupplierResponseDTO addSupplier(BusSupplierRequestDTO dto) {
 
+        if(repository.existsByEmail(dto.getEmail())) {
+            throw new RuntimeException("Supplier email already exists");
+        }
+
         BusSupplier supplier = BusSupplierMapper.toEntity(dto);
 
         BusSupplier saved = repository.save(supplier);

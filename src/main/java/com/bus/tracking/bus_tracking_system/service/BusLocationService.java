@@ -31,12 +31,32 @@ public class BusLocationService {
         Bus bus = busRepository.findById(dto.getBusId())
                 .orElseThrow(() -> new RuntimeException("Bus not found"));
 
+        if(dto.getLatitude() < -90 ||
+                dto.getLatitude() > 90) {
+
+            throw new RuntimeException("Invalid latitude");
+        }
+
+        if(dto.getLongitude() < -180 ||
+                dto.getLongitude() > 180) {
+
+            throw new RuntimeException("Invalid longitude");
+        }
         BusLocation location =
                 BusLocationMapper.toEntity(dto, bus);
 
         BusLocation saved = repo.save(location);
 
         return BusLocationMapper.toDTO(saved);
+    }
+
+    public BusLocationResponseDTO getLocationById(Long id) {
+
+        BusLocation location = repo.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Location not found"));
+
+        return BusLocationMapper.toDTO(location);
     }
 
     public BusLocationResponseDTO getLatestLocation(Long busId) {
@@ -55,5 +75,9 @@ public class BusLocationService {
                 .stream()
                 .map(BusLocationMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteLocation(Long id) {
+        repo.deleteById(id);
     }
 }
