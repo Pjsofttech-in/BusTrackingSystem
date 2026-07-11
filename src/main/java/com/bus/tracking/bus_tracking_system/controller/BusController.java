@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
 @RequestMapping("/bus")
 public class BusController {
 
@@ -87,6 +87,16 @@ public class BusController {
         return ResponseEntity.ok(updatedBus);
     }
 
+//    //UPDATE
+//    @PutMapping("/updateBus/{id}")
+//    public BusResponseDTO updateBus(
+//            @PathVariable Long id,
+//            @RequestBody BusRequestDTO dto) {
+//
+//        return service.updateBus(id, dto);
+//    }
+
+    // DELETE
     // DELETE BUS
     @DeleteMapping("/deleteBus/{id}")
     public ResponseEntity<String> deleteBus(@PathVariable Long id) {

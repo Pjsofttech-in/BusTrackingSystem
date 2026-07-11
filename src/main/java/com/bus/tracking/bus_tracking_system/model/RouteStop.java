@@ -15,6 +15,11 @@ public class RouteStop {
 
     private String stopName;
     private String arrivalTime;
+    private Integer stopOrder;
+    private String status;
+
+    private Double latitude;
+    private Double longitude;
 
     //  Many Stops → One Route
     @ManyToOne

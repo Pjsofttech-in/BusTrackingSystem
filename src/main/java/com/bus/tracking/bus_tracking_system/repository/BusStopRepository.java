@@ -8,4 +8,11 @@ public interface BusStopRepository extends JpaRepository<BusStop, Long> {
 
     List<BusStop> findByBus_IdOrderBySequenceNumberAsc(Long busId);
 
+    boolean existsByBus_IdAndStopName(
+            Long busId,
+            String stopName);
+
+    boolean existsByBus_IdAndSequenceNumber(
+            Long busId,
+            int sequenceNumber);
 }

@@ -29,6 +29,12 @@ public class DivisionController {
         return divisionService.getDivisionById(id);
     }
 
+    @PutMapping("/updateDivision/{id}")
+    public DivisionEntity updateDivision(@PathVariable Long id,
+                                         @RequestBody DivisionEntity division) {
+        return divisionService.updateDivision(id, division);
+    }
+
     @DeleteMapping("/deleteDivision/{id}")
     public String deleteDivision(@PathVariable Long id){
         divisionService.deleteDivision(id);

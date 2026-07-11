@@ -21,6 +21,16 @@ public class AcademicYearService {
         return repo.save(year);
     }
 
+    //Update Academic Year
+    public AcademicYear updateYear(Long id, AcademicYear updatedYear) {
+        AcademicYear year = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Academic Year not found"));
+
+        year.setYearName(updatedYear.getYearName());
+
+        return repo.save(year);
+    }
+
     // Get All Academic Years
     public List<AcademicYear> getAllYears() {
         return repo.findAll();

@@ -29,6 +29,12 @@ public class MediumController {
         return mediumService.getMediumById(id);
     }
 
+    @PutMapping("/updateMedium/{id}")
+    public MediumEntity updateMedium(@PathVariable Long id,
+                                     @RequestBody MediumEntity medium) {
+        return mediumService.updateMedium(id, medium);
+    }
+
     @DeleteMapping("/deleteMedium/{id}")
     public String deleteMedium(@PathVariable Long id){
         mediumService.deleteMedium(id);

@@ -17,6 +17,16 @@ public class StudentScanController {
         this.service = service;
     }
 
+    @PostMapping("/scanExit/{studentId}/{busId}")
+    public ResponseEntity<String> scanExit(
+            @PathVariable Long studentId,
+            @PathVariable Long busId) {
+
+        // call service here later
+
+        return ResponseEntity.ok("Student exited bus");
+    }
+
     @PostMapping("/{studentId}/{busId}")
     public ResponseEntity<StudentScanResponseDTO> scanStudent(
             @PathVariable Long studentId,

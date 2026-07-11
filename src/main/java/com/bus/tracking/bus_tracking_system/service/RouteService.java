@@ -42,6 +42,28 @@ public class RouteService {
                 .toList();
     }
 
+    //UPDATE ROUTES
+    public RouteResponseDTO updateRoute(Long id,
+                                        RouteRequestDTO dto) {
+
+        Route route = routeRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Route not found"));
+
+        route.setRouteName(dto.getRouteName());
+        route.setStartPoint(dto.getStartPoint());
+        route.setEndPoint(dto.getEndPoint());
+        route.setStartTime(dto.getStartTime());
+        route.setStopTime(dto.getStopTime());
+        route.setTotalDistanceKm(dto.getTotalDistanceKm());
+        route.setEstimatedTimeMin(dto.getEstimatedTimeMin());
+        route.setStatus(dto.getStatus());
+
+        return RouteMapper.toDTO(
+                routeRepository.save(route)
+        );
+    }
+
     // DELETE ROUTE
     public void deleteRoute(Long id) {
         routeRepository.deleteById(id);

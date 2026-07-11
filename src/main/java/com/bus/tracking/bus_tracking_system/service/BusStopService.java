@@ -29,8 +29,25 @@ public class BusStopService {
     // ADD STOP
     public BusStopResponseDTO addStop(BusStopRequestDTO dto) {
 
+        if (repo.existsByBus_IdAndStopName(
+                dto.getBusId(),
+                dto.getStopName())) {
+
+            throw new RuntimeException(
+                    "Stop already exists for this bus");
+        }
+
+        if (repo.existsByBus_IdAndSequenceNumber(
+                dto.getBusId(),
+                dto.getSequenceNumber())) {
+
+            throw new RuntimeException(
+                    "Sequence number already exists");
+        }
+
         Bus bus = busRepository.findById(dto.getBusId())
-                .orElseThrow(() -> new RuntimeException("Bus not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Bus not found"));
 
         BusStop stop = BusStopMapper.toEntity(dto, bus);
 
@@ -46,6 +63,35 @@ public class BusStopService {
                 .stream()
                 .map(BusStopMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    //GET STOP BY ID
+    public BusStopResponseDTO getStopById(Long id) {
+
+        BusStop stop = repo.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Stop not found"));
+
+        return BusStopMapper.toDTO(stop);
+    }
+
+    //UPDATE
+    public BusStopResponseDTO updateStop(
+            Long id,
+            BusStopRequestDTO dto) {
+
+        BusStop stop = repo.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Stop not found"));
+
+        stop.setStopName(dto.getStopName());
+        stop.setLatitude(dto.getLatitude());
+        stop.setLongitude(dto.getLongitude());
+        stop.setSequenceNumber(dto.getSequenceNumber());
+
+        BusStop updated = repo.save(stop);
+
+        return BusStopMapper.toDTO(updated);
     }
 
     // MARK STOP REACHED

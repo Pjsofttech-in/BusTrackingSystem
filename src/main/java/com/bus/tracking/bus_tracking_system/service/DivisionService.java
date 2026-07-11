@@ -27,6 +27,16 @@ public class DivisionService {
         return division.orElse(null);
     }
 
+    public DivisionEntity updateDivision(Long id, DivisionEntity updatedDivision) {
+
+        DivisionEntity division = divisionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Division not found"));
+
+        division.setDivisionName(updatedDivision.getDivisionName());
+
+        return divisionRepository.save(division);
+    }
+
     public void deleteDivision(Long id) {
         divisionRepository.deleteById(id);
     }

@@ -30,6 +30,19 @@ public class AcademicYearController {
         return service.getAllYears();
     }
 
+    // UPDATE ALL
+    @PutMapping("/updateAcademicYear/{id}")
+    public AcademicYear updateYear(@PathVariable Long id,
+                                   @RequestBody AcademicYear year) {
+        return service.updateYear(id, year);
+    }
+
+    //GET BY ID
+    @GetMapping("/getAcademicYear/{id}")
+    public AcademicYear getYear(@PathVariable Long id) {
+        return service.getYearById(id);
+    }
+
     // DELETE
     @DeleteMapping("/deleteAcademicYear/{id}")
     public String deleteYear(@PathVariable Long id) {

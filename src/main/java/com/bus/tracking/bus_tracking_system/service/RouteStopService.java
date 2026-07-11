@@ -51,6 +51,21 @@ public class RouteStopService {
         return RouteStopMapper.toDTO(stop);
     }
 
+    //UPDATE STOP
+    public RouteStopDTO updateStop(Long id, RouteStopDTO dto) {
+
+        RouteStop stop = routeStopRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Stop not found"));
+
+        stop.setStopName(dto.getStopName());
+        stop.setArrivalTime(dto.getArrivalTime());
+
+        RouteStop updated = routeStopRepository.save(stop);
+
+        return RouteStopMapper.toDTO(updated);
+    }
+
+
     //  DELETE STOP
     public void deleteStop(Long id) {
         routeStopRepository.deleteById(id);

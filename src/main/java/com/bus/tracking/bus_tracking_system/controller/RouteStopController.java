@@ -35,6 +35,17 @@ public class RouteStopController {
         return service.getStop(id);
     }
 
+    //UPDATE
+    @PutMapping("/{id}")
+    public RouteStopDTO updateStop(
+            @PathVariable Long id,
+            @RequestBody RouteStopDTO dto) {
+
+        return service.updateStop(id, dto);
+    }
+
+
+
     //  DELETE
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
