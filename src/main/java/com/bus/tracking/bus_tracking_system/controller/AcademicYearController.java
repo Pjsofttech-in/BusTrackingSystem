@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AcademicYearController {
 
     private final AcademicYearService service;

@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://pjsofttech.com")
-//@RequestMapping("/busstop")
+//@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/busstop")
 public class BusStopController {
 
     private final BusStopService service;

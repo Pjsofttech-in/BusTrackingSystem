@@ -16,12 +16,16 @@ public class DriverMapper {
 
         driver.setName(dto.getName());
         driver.setPhone(dto.getPhone());
+        driver.setEmail(dto.getEmail());
         driver.setPassword(dto.getPassword()); // encrypt in service
         driver.setLicenseNumber(dto.getLicenseNumber());
+        driver.setLicenseType(dto.getLicenseType());
+        driver.setLicensePhoto(dto.getLicensePhoto());
+        driver.setDriverPhoto(dto.getDriverPhoto());
         driver.setExperienceYears(dto.getExperienceYears());
         driver.setStatus(dto.getStatus());
 
-        // ✅ NEW FIELDS (important)
+        // New fields
         driver.setLicenseExpiryDate(dto.getLicenseExpiryDate());
         driver.setJoiningDate(dto.getJoiningDate());
         driver.setTerminateDate(dto.getTerminateDate());
@@ -46,11 +50,14 @@ public class DriverMapper {
         dto.setId(driver.getId());
         dto.setName(driver.getName());
         dto.setPhone(driver.getPhone());
+        dto.setEmail(driver.getEmail());
         dto.setLicenseNumber(driver.getLicenseNumber());
+        dto.setLicenseType(driver.getLicenseType());
+        dto.setLicensePhoto(driver.getLicensePhoto());
+        dto.setDriverPhoto(driver.getDriverPhoto());
         dto.setEmployeeId(driver.getEmployeeId());
         dto.setExperienceYears(driver.getExperienceYears());
         dto.setStatus(driver.getStatus());
-
 
         // Address
         dto.setHouseNo(driver.getHouseNo());

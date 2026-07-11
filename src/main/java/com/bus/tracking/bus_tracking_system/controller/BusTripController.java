@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/trips")
-@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BusTripController {
 
     private final BusTripService tripService;

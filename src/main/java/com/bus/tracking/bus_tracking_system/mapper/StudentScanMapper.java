@@ -13,7 +13,7 @@ public class StudentScanMapper {
         dto.setStudentId(scan.getStudent().getId());
         dto.setStudentName(scan.getStudent().getName());
         dto.setBusId(scan.getBus().getId());
-        dto.setBusNumber(scan.getBus().getBusNumber());
+//        dto.setBusNumber(scan.getBus().getBusNumber());
         dto.setScannedAt(scan.getScannedAt());
 
         return dto;

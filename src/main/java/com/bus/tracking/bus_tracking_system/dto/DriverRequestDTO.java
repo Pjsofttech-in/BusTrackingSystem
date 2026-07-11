@@ -11,15 +11,19 @@ public class DriverRequestDTO {
 
     private String name;
     private String phone;
+    private String email;
     private String password;
     private String licenseNumber;
+    private String licenseType;
+    private String licensePhoto;
+    private String driverPhoto;
     private int experienceYears;
     private String status;
     private String employeeId;
 
-    private LocalDate licenseExpiryDate; //added
-    private LocalDate joiningDate;       // added
-    private LocalDate terminateDate;     // added
+    private LocalDate licenseExpiryDate;
+    private LocalDate joiningDate;
+    private LocalDate terminateDate;
 
     // Address
     private String houseNo;

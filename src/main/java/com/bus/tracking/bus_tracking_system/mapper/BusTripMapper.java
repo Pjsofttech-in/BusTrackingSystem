@@ -14,6 +14,7 @@ public class BusTripMapper {
         BusTrip trip = new BusTrip();
         trip.setStartTime(dto.getStartTime());
         trip.setEndTime(dto.getEndTime());
+
         trip.setTripStatus(dto.getTripStatus());
 
         return trip;
@@ -31,7 +32,7 @@ public class BusTripMapper {
         //  BUS
         if (trip.getBus() != null) {
             dto.setBusId(trip.getBus().getId());
-            dto.setBusNumber(trip.getBus().getBusNumber());
+//            dto.setBusNumber(trip.getBus().getBusNumber());
         }
 
         //  ROUTE

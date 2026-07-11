@@ -10,7 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/service-provider")
-@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ServiceProviderController {
 
     private final ServiceProviderService service;

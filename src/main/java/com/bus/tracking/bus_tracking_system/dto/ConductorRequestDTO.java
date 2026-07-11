@@ -7,20 +7,21 @@ public class ConductorRequestDTO {
 
     private String name;
     private String phone;
+    private String email;
     private String employeeId;
     private String status;
     private LocalDate joiningDate;
     private LocalDate terminateDate;
     private Date licenseExpiryDate;
-
+    private String licensePhoto;
+    private String conductorPhoto;
     private String houseNo;
     private String street;
     private String city;
     private String state;
     private String pincode;
 
-    // getters and setters
-
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -35,6 +36,14 @@ public class ConductorRequestDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmployeeId() {
@@ -75,6 +84,22 @@ public class ConductorRequestDTO {
 
     public void setLicenseExpiryDate(Date licenseExpiryDate) {
         this.licenseExpiryDate = licenseExpiryDate;
+    }
+
+    public String getLicensePhoto() {
+        return licensePhoto;
+    }
+
+    public void setLicensePhoto(String licensePhoto) {
+        this.licensePhoto = licensePhoto;
+    }
+
+    public String getConductorPhoto() {
+        return conductorPhoto;
+    }
+
+    public void setConductorPhoto(String conductorPhoto) {
+        this.conductorPhoto = conductorPhoto;
     }
 
     public String getHouseNo() {

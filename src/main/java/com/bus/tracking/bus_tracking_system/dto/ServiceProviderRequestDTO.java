@@ -5,11 +5,13 @@ public class ServiceProviderRequestDTO {
     private String name;
     private String mobile;
     private String email;
+    private String busNumber;
     //private String address;
     private String state;
     private String city;
     private String pincode;
     // getters and setters
+
 
     public String getName() {
         return name;
@@ -35,6 +37,22 @@ public class ServiceProviderRequestDTO {
         this.email = email;
     }
 
+    public String getBusNumber() {
+        return busNumber;
+    }
+
+    public void setBusNumber(String busNumber) {
+        this.busNumber = busNumber;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getCity() {
         return city;
     }
@@ -49,13 +67,5 @@ public class ServiceProviderRequestDTO {
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/driver")
-@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DriverController {
 
     private final DriverService service;
@@ -34,6 +34,12 @@ public class DriverController {
     @GetMapping("/{id}")
     public DriverResponseDTO getDriver(@PathVariable Long id) {
         return service.getDriverById(id);
+    }
+
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public DriverResponseDTO updateDriver(@PathVariable Long id, @RequestBody DriverRequestDTO dto) {
+        return service.updateDriver(id, dto);
     }
 
     // LOGIN

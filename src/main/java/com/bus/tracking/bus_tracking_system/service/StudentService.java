@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 public class StudentService {
 
     private final StudentRepository studentRepository;
-    private final QrCodeService qrCodeService;
+//    private final QrCodeService qrCodeService;
 
-    public StudentService(StudentRepository studentRepository,
-                          QrCodeService qrCodeService) {
+    public StudentService(StudentRepository studentRepository
+                          ) {
         this.studentRepository = studentRepository;
-        this.qrCodeService = qrCodeService;
+//        this.qrCodeService = qrCodeService;
     }
 
     // CREATE
@@ -28,8 +28,8 @@ public class StudentService {
 
         Student saved = studentRepository.save(student);
 
-        String qrUrl = qrCodeService.generateAndUploadQR(saved.getId());
-        saved.setQrImageUrl(qrUrl);
+//        String qrUrl = qrCodeService.generateAndUploadQR(saved.getId());
+//        saved.setQrImageUrl(qrUrl);
 
         return StudentMapper.toDTO(studentRepository.save(saved));
     }

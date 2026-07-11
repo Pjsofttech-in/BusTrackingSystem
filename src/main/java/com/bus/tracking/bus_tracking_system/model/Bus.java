@@ -11,11 +11,17 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "bus")
 public class Bus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // Relationship with ServiceProvider
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_provider_id")
+    private ServiceProvider serviceProvider;
 
     @ManyToOne
     @JoinColumn(name = "route_id")
@@ -35,12 +41,19 @@ public class Bus {
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BusStop> stops;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StudentScan> scans;
+    @Column(name = "bus_number", unique = true, nullable = false)
+    private String busNumber;  // Common field - matches ServiceProvider.busNumber
 
-    private String busNumber;
+    @Column(name = "bus_type")
     private String busType;
+
+    @Column(name = "mfg_year")
+    private int mfgYear;
+
+    @Column(name = "capacity")
     private int capacity;
+
+    @Column(name = "status")
     private String status;
 
     @Column(updatable = false)

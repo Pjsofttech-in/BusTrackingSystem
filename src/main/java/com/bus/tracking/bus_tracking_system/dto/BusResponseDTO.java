@@ -1,24 +1,22 @@
 package com.bus.tracking.bus_tracking_system.dto;
 
+import java.time.LocalDateTime;
+
 public class BusResponseDTO {
 
     private Long id;
     private String busNumber;
     private String busType;
+    private int mfgYear;
     private int capacity;
     private String status;
+    private Long serviceProviderId;
+    private String serviceProviderName;
+    private String serviceProviderBusNumber; // The busNumber from ServiceProvider
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    private Long routeId;
-    private String routeName;
-
-    private Long driverId;
-    private String driverName;
-
-    private Long conductorId;
-    private String conductorName;
-
-    // getters and setters
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -43,6 +41,14 @@ public class BusResponseDTO {
         this.busType = busType;
     }
 
+    public int getMfgYear() {
+        return mfgYear;
+    }
+
+    public void setMfgYear(int mfgYear) {
+        this.mfgYear = mfgYear;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -59,51 +65,43 @@ public class BusResponseDTO {
         this.status = status;
     }
 
-    public Long getRouteId() {
-        return routeId;
+    public Long getServiceProviderId() {
+        return serviceProviderId;
     }
 
-    public void setRouteId(Long routeId) {
-        this.routeId = routeId;
+    public void setServiceProviderId(Long serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
     }
 
-    public String getRouteName() {
-        return routeName;
+    public String getServiceProviderName() {
+        return serviceProviderName;
     }
 
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
+    public void setServiceProviderName(String serviceProviderName) {
+        this.serviceProviderName = serviceProviderName;
     }
 
-    public Long getDriverId() {
-        return driverId;
+    public String getServiceProviderBusNumber() {
+        return serviceProviderBusNumber;
     }
 
-    public void setDriverId(Long driverId) {
-        this.driverId = driverId;
+    public void setServiceProviderBusNumber(String serviceProviderBusNumber) {
+        this.serviceProviderBusNumber = serviceProviderBusNumber;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Long getConductorId() {
-        return conductorId;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setConductorId(Long conductorId) {
-        this.conductorId = conductorId;
-    }
-
-    public String getConductorName() {
-        return conductorName;
-    }
-
-    public void setConductorName(String conductorName) {
-        this.conductorName = conductorName;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

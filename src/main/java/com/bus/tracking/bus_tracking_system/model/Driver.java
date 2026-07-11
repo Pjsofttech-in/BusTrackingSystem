@@ -18,9 +18,19 @@ public class Driver {
 
     private String name;
     private String phone;
+    private String email;
     private String password;
     private String licenseNumber;
     private String employeeId;
+    private String licenseType;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String licensePhoto;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String driverPhoto;
 
     private LocalDate licenseExpiryDate;
     private int experienceYears;

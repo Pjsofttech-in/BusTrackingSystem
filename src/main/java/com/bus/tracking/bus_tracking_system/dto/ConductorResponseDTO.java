@@ -17,16 +17,17 @@ public class ConductorResponseDTO {
     private Long id;
     private String name;
     private String phone;
+    private String email;
     private String employeeId;
     private String status;
     private LocalDate joiningDate;
     private LocalDate terminateDate;
     private Date licenseExpiryDate;
-
+    private String licensePhoto;
+    private String conductorPhoto;
     private String houseNo;
     private String street;
     private String city;
     private String state;
     private String pincode;
-
 }

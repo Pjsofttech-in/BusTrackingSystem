@@ -13,7 +13,11 @@ public class DriverResponseDTO {
     private Long id;
     private String name;
     private String phone;
+    private String email;
     private String licenseNumber;
+    private String licenseType;
+    private String licensePhoto;
+    private String driverPhoto;
     private String employeeId;
     private int experienceYears;
     private String status;

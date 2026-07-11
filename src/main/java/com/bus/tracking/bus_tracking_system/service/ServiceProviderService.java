@@ -61,6 +61,7 @@ public class ServiceProviderService {
         existing.setName(dto.getName());
         existing.setMobile(dto.getMobile());
         existing.setEmail(dto.getEmail());
+        existing.setBusNumber(dto.getBusNumber());
         //existing.setAddress(dto.getAddress());
 
         ServiceProvider updated = repo.save(existing);
