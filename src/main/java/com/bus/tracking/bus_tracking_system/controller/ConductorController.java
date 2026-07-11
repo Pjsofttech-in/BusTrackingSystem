@@ -30,9 +30,22 @@ public class ConductorController {
      * POST /conductor/add
      */
     @PostMapping("/add")
-    public ResponseEntity<ConductorResponseDTO> addConductor(@RequestBody ConductorRequestDTO dto) {
-        ConductorResponseDTO response = service.addConductor(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<?> addConductor(@RequestBody ConductorRequestDTO dto) {
+        try {
+            // Log incoming data for debugging
+            System.out.println("Received conductor data: " + dto);
+            System.out.println("Name: " + dto.getName());
+            System.out.println("Phone: " + dto.getPhone());
+            System.out.println("Email: " + dto.getEmail());
+            System.out.println("EmployeeId: " + dto.getEmployeeId());
+            System.out.println("Status: " + dto.getStatus());
+
+            ConductorResponseDTO response = service.addConductor(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
     }
 
     /**
@@ -80,11 +93,16 @@ public class ConductorController {
      * PUT /conductor/update/{id}
      */
     @PutMapping("/update/{id}")
-    public ResponseEntity<ConductorResponseDTO> updateConductor(
+    public ResponseEntity<?> updateConductor(
             @PathVariable Long id,
             @RequestBody ConductorRequestDTO dto) {
-        ConductorResponseDTO updated = service.updateConductor(id, dto);
-        return ResponseEntity.ok(updated);
+        try {
+            ConductorResponseDTO updated = service.updateConductor(id, dto);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
     }
 
     /**
@@ -102,15 +120,18 @@ public class ConductorController {
      * POST /conductor/upload-photo/{id}
      */
     @PostMapping("/upload-photo/{id}")
-    public ResponseEntity<ConductorResponseDTO> uploadConductorPhoto(
+    public ResponseEntity<?> uploadConductorPhoto(
             @PathVariable Long id,
             @RequestParam("photo") MultipartFile file) throws IOException {
 
-        // Convert file to base64
-        String base64Photo = Base64.getEncoder().encodeToString(file.getBytes());
-
-        ConductorResponseDTO updated = service.updateConductorPhoto(id, base64Photo);
-        return ResponseEntity.ok(updated);
+        try {
+            String base64Photo = Base64.getEncoder().encodeToString(file.getBytes());
+            ConductorResponseDTO updated = service.updateConductorPhoto(id, base64Photo);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
     }
 
     /**
@@ -118,15 +139,18 @@ public class ConductorController {
      * POST /conductor/upload-license/{id}
      */
     @PostMapping("/upload-license/{id}")
-    public ResponseEntity<ConductorResponseDTO> uploadLicensePhoto(
+    public ResponseEntity<?> uploadLicensePhoto(
             @PathVariable Long id,
             @RequestParam("licensePhoto") MultipartFile file) throws IOException {
 
-        // Convert file to base64
-        String base64Photo = Base64.getEncoder().encodeToString(file.getBytes());
-
-        ConductorResponseDTO updated = service.updateLicensePhoto(id, base64Photo);
-        return ResponseEntity.ok(updated);
+        try {
+            String base64Photo = Base64.getEncoder().encodeToString(file.getBytes());
+            ConductorResponseDTO updated = service.updateLicensePhoto(id, base64Photo);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        }
     }
 
     /**

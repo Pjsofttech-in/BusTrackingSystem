@@ -6,36 +6,62 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Table(name = "conductor")
 public class Conductor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "phone", nullable = false, length = 10)
     private String phone;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "employee_id", nullable = false, unique = true)
     private String employeeId;
+
+    @Column(name = "status", nullable = false)
     private String status;
+
+    @Column(name = "joining_date")
     private LocalDate joiningDate;
+
+    @Column(name = "terminate_date")
     private LocalDate terminateDate;
+
+    @Column(name = "house_no")
     private String houseNo;
+
+    @Column(name = "street")
     private String street;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "state")
     private String state;
+
+    @Column(name = "pincode")
     private String pincode;
 
+    @Column(name = "license_expiry_date")
     @Temporal(TemporalType.DATE)
     private Date licenseExpiryDate;
 
     @Lob
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(name = "license_photo", columnDefinition = "LONGTEXT")
     private String licensePhoto;
 
     @Lob
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(name = "conductor_photo", columnDefinition = "LONGTEXT")
     private String conductorPhoto;
 
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @PrePersist
@@ -43,140 +69,5 @@ public class Conductor {
         createdAt = LocalDateTime.now();
     }
 
-    // ================= GETTERS AND SETTERS =================
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDate getJoiningDate() {
-        return joiningDate;
-    }
-
-    public void setJoiningDate(LocalDate joiningDate) {
-        this.joiningDate = joiningDate;
-    }
-
-    public LocalDate getTerminateDate() {
-        return terminateDate;
-    }
-
-    public void setTerminateDate(LocalDate terminateDate) {
-        this.terminateDate = terminateDate;
-    }
-
-    public String getHouseNo() {
-        return houseNo;
-    }
-
-    public void setHouseNo(String houseNo) {
-        this.houseNo = houseNo;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public Date getLicenseExpiryDate() {
-        return licenseExpiryDate;
-    }
-
-    public void setLicenseExpiryDate(Date licenseExpiryDate) {
-        this.licenseExpiryDate = licenseExpiryDate;
-    }
-
-    public String getLicensePhoto() {
-        return licensePhoto;
-    }
-
-    public void setLicensePhoto(String licensePhoto) {
-        this.licensePhoto = licensePhoto;
-    }
-
-    public String getConductorPhoto() {
-        return conductorPhoto;
-    }
-
-    public void setConductorPhoto(String conductorPhoto) {
-        this.conductorPhoto = conductorPhoto;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    // Getters and Setters...
 }
