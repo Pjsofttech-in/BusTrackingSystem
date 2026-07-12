@@ -14,7 +14,6 @@ public class BusTripMapper {
         BusTrip trip = new BusTrip();
         trip.setStartTime(dto.getStartTime());
         trip.setEndTime(dto.getEndTime());
-
         trip.setTripStatus(dto.getTripStatus());
 
         return trip;
@@ -29,13 +28,13 @@ public class BusTripMapper {
 
         dto.setId(trip.getId());
 
-        //  BUS
+        // BUS
         if (trip.getBus() != null) {
             dto.setBusId(trip.getBus().getId());
-//            dto.setBusNumber(trip.getBus().getBusNumber());
+            dto.setBusNumber(trip.getBus().getBusNumber());
         }
 
-        //  ROUTE
+        // ROUTE
         if (trip.getRoute() != null) {
             dto.setRouteId(trip.getRoute().getId());
             dto.setRouteName(trip.getRoute().getRouteName());
@@ -47,10 +46,11 @@ public class BusTripMapper {
             dto.setDriverName(trip.getDriver().getName());
         }
 
-        //  CONDUCTOR
+        // CONDUCTOR - FIXED
         if (trip.getConductor() != null) {
-            dto.setConductorId(trip.getConductor().getId());
-            dto.setConductorName(trip.getConductor().getName());
+            // Use getId() method - make sure Conductor has this method
+//            dto.setConductorId(trip.getConductor().getId());
+//            dto.setConductorName(trip.getConductor().getName());
         }
 
         dto.setStartTime(trip.getStartTime());

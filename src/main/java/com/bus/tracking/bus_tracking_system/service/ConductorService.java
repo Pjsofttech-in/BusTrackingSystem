@@ -70,6 +70,7 @@ public class ConductorService {
         Conductor existing = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Conductor not found with id: " + id));
 
+        // Set all fields - these methods must exist in Conductor class
         existing.setName(dto.getName());
         existing.setPhone(dto.getPhone());
         existing.setEmail(dto.getEmail());

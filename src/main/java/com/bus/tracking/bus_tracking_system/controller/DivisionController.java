@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "https://pjsofttech.com")
+
 public class DivisionController {
 
     @Autowired

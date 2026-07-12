@@ -1,12 +1,21 @@
 package com.bus.tracking.bus_tracking_system.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "conductor")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Conductor {
 
     @Id
@@ -68,6 +77,4 @@ public class Conductor {
     public void onCreate() {
         createdAt = LocalDateTime.now();
     }
-
-    // Getters and Setters...
 }
