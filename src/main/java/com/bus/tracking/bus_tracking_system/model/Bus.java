@@ -24,7 +24,7 @@ public class Bus {
     private ServiceProvider serviceProvider;
 
     @ManyToOne
-    @JoinColumn(name = "route_id")
+    @JoinColumn(name = "route_id", nullable = true)
     private Route route;
 
     @ManyToOne
