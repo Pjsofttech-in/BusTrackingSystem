@@ -1,11 +1,11 @@
 package com.app.bustracking.controller;
 
-import com.app.bustracking.Request.DriverRequest;
-import com.app.bustracking.Response.DriverResponse;
+import com.app.bustracking.dto.DriverRequestDTO;
+import com.app.bustracking.dto.DriverResponseDTO;
 import com.app.bustracking.service.DriverService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,35 +13,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/drivers")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class DriverController {
 
-    private final DriverService driverService;
+    private final DriverService service;
 
     @GetMapping
-    public List<DriverResponse> getAll() {
-        return driverService.getAll();
+    public ResponseEntity<List<DriverResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}")
-    public DriverResponse getById(@PathVariable Long id) {
-        return driverService.getById(id);
+    public ResponseEntity<DriverResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public DriverResponse create(@Valid @RequestBody DriverRequest request) {
-        return driverService.create(request);
+    public ResponseEntity<DriverResponseDTO> create(@RequestBody DriverRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
     @PutMapping("/{id}")
-    public DriverResponse update(@PathVariable Long id, @Valid @RequestBody DriverRequest request) {
-        return driverService.update(id, request);
+    public ResponseEntity<DriverResponseDTO> update(@PathVariable Long id, @RequestBody DriverRequestDTO request) {
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        driverService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,6 +1,6 @@
 package com.app.bustracking.repository;
 
-import com.app.bustracking.Model.DriverModel;
+import com.app.bustracking.model.DriverModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

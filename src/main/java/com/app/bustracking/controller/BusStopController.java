@@ -1,12 +1,11 @@
-// src/main/java/com/app/bustracking/controller/BusStopController.java
 package com.app.bustracking.controller;
 
-import com.app.bustracking.Request.BusStopRequest;
-import com.app.bustracking.Response.BusStopResponse;
+import com.app.bustracking.dto.BusStopRequestDTO;
+import com.app.bustracking.dto.BusStopResponseDTO;
 import com.app.bustracking.service.BusStopService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,40 +13,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/bus-stops")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class BusStopController {
 
-    private final BusStopService busStopService;
+    private final BusStopService service;
 
     @GetMapping
-    public List<BusStopResponse> getAll() {
-        return busStopService.getAll();
+    public ResponseEntity<List<BusStopResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}")
-    public BusStopResponse getById(@PathVariable Long id) {
-        return busStopService.getById(id);
+    public ResponseEntity<BusStopResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public BusStopResponse create(@Valid @RequestBody BusStopRequest request) {
-        return busStopService.create(request);
+    public ResponseEntity<BusStopResponseDTO> create(@RequestBody BusStopRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
     @PutMapping("/{id}")
-    public BusStopResponse update(@PathVariable Long id, @Valid @RequestBody BusStopRequest request) {
-        return busStopService.update(id, request);
+    public ResponseEntity<BusStopResponseDTO> update(@PathVariable Long id, @RequestBody BusStopRequestDTO request) {
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        busStopService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/reached")
-    public BusStopResponse markReached(@PathVariable Long id) {
-        return busStopService.markReached(id);
+    public ResponseEntity<BusStopResponseDTO> markReached(@PathVariable Long id) {
+        return ResponseEntity.ok(service.markReached(id));
     }
 }

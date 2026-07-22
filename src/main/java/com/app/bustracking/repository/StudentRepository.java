@@ -1,6 +1,6 @@
 package com.app.bustracking.repository;
 
-import com.app.bustracking.Model.StudentModel;
+import com.app.bustracking.model.StudentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

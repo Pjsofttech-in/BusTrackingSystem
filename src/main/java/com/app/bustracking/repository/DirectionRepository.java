@@ -1,6 +1,6 @@
 package com.app.bustracking.repository;
 
-import com.app.bustracking.Model.DirectionModel;
+import com.app.bustracking.model.DirectionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

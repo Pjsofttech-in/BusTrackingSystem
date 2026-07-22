@@ -1,11 +1,11 @@
 package com.app.bustracking.controller;
 
-import com.app.bustracking.Request.BusRouteRequest;
-import com.app.bustracking.Response.BusRouteResponse;
+import com.app.bustracking.dto.BusRouteRequestDTO;
+import com.app.bustracking.dto.BusRouteResponseDTO;
 import com.app.bustracking.service.BusRouteService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,35 +13,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/bus-routes")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class BusRouteController {
 
-    private final BusRouteService busRouteService;
+    private final BusRouteService service;
 
     @GetMapping
-    public List<BusRouteResponse> getAll() {
-        return busRouteService.getAll();
+    public ResponseEntity<List<BusRouteResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}")
-    public BusRouteResponse getById(@PathVariable Long id) {
-        return busRouteService.getById(id);
+    public ResponseEntity<BusRouteResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public BusRouteResponse create(@Valid @RequestBody BusRouteRequest request) {
-        return busRouteService.create(request);
+    public ResponseEntity<BusRouteResponseDTO> create(@RequestBody BusRouteRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
     @PutMapping("/{id}")
-    public BusRouteResponse update(@PathVariable Long id, @Valid @RequestBody BusRouteRequest request) {
-        return busRouteService.update(id, request);
+    public ResponseEntity<BusRouteResponseDTO> update(@PathVariable Long id, @RequestBody BusRouteRequestDTO request) {
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        busRouteService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

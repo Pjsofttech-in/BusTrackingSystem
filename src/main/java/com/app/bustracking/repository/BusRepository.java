@@ -1,6 +1,6 @@
 package com.app.bustracking.repository;
 
-import com.app.bustracking.Model.BusModel;
+import com.app.bustracking.model.BusModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BusRepository extends JpaRepository<BusModel, Long> {

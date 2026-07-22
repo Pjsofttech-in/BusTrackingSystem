@@ -1,11 +1,11 @@
 package com.app.bustracking.controller;
 
-import com.app.bustracking.Request.MediumRequest;
-import com.app.bustracking.Response.MediumResponse;
+import com.app.bustracking.dto.MediumRequestDTO;
+import com.app.bustracking.dto.MediumResponseDTO;
 import com.app.bustracking.service.MediumService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,35 +13,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/mediums")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class MediumController {
 
     private final MediumService service;
 
     @GetMapping
-    public List<MediumResponse> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<MediumResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @GetMapping("/{id}")
-    public MediumResponse getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ResponseEntity<MediumResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public MediumResponse create(@Valid @RequestBody MediumRequest request) {
-        return service.create(request);
+    public ResponseEntity<MediumResponseDTO> create(@RequestBody MediumRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
     @PutMapping("/{id}")
-    public MediumResponse update(@PathVariable Long id, @Valid @RequestBody MediumRequest request) {
-        return service.update(id, request);
+    public ResponseEntity<MediumResponseDTO> update(@PathVariable Long id, @RequestBody MediumRequestDTO request) {
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

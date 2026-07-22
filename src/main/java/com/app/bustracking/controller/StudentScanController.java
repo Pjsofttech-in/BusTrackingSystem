@@ -1,11 +1,11 @@
 package com.app.bustracking.controller;
 
-import com.app.bustracking.Request.StudentScanRequest;
-import com.app.bustracking.Response.StudentScanResponse;
+import com.app.bustracking.dto.StudentScanRequestDTO;
+import com.app.bustracking.dto.StudentScanResponseDTO;
 import com.app.bustracking.service.StudentScanService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,29 +13,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/student-scans")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com")
+//@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class StudentScanController {
 
     private final StudentScanService service;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public StudentScanResponse recordScan(@Valid @RequestBody StudentScanRequest request) {
-        return service.recordScan(request);
+    @GetMapping
+    public ResponseEntity<List<StudentScanResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentScanResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping("/student/{studentId}")
-    public List<StudentScanResponse> getByStudent(@PathVariable Long studentId) {
-        return service.getByStudentId(studentId);
+    public ResponseEntity<List<StudentScanResponseDTO>> getByStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(service.getByStudentId(studentId));
     }
 
     @GetMapping("/bus/{busId}")
-    public List<StudentScanResponse> getByBus(@PathVariable Long busId) {
-        return service.getByBusId(busId);
+    public ResponseEntity<List<StudentScanResponseDTO>> getByBus(@PathVariable Long busId) {
+        return ResponseEntity.ok(service.getByBusId(busId));
     }
 
-    @GetMapping
-    public List<StudentScanResponse> getAll() {
-        return service.getAll();
+    @PostMapping
+    public ResponseEntity<StudentScanResponseDTO> recordScan(@RequestBody StudentScanRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.recordScan(request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
