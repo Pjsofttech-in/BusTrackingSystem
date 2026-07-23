@@ -11,7 +11,8 @@ public class BusResponseDTO {
     private String busNumber;
     private String busType;
     private String busModelName;
-    private ServiceProviderResponseDTO serviceProvider;   // nested
+    private Long serviceProviderId;          // for reference
+    private String serviceProviderName;      // ✅ added for display
     private Integer mfgYear;
     private Integer capacity;
     private String status;
@@ -50,12 +51,20 @@ public class BusResponseDTO {
         this.busModelName = busModelName;
     }
 
-    public ServiceProviderResponseDTO getServiceProvider() {
-        return serviceProvider;
+    public Long getServiceProviderId() {
+        return serviceProviderId;
     }
 
-    public void setServiceProvider(ServiceProviderResponseDTO serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    public void setServiceProviderId(Long serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
+    }
+
+    public String getServiceProviderName() {
+        return serviceProviderName;
+    }
+
+    public void setServiceProviderName(String serviceProviderName) {
+        this.serviceProviderName = serviceProviderName;
     }
 
     public Integer getMfgYear() {

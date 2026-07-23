@@ -45,11 +45,9 @@ public class BusRouteService {
         BusStopModel endStop = dto.getEndStopId() != null ? busStopRepository.findById(dto.getEndStopId()).orElse(null) : null;
 
         BusRouteModel route = BusRouteMapper.toEntity(dto, bus, driver, conductor, startStop, endStop);
-
-        // Save route first to get ID
         BusRouteModel savedRoute = routeRepository.save(route);
 
-        // Add stops if provided
+        // Add stops
         if (dto.getStopIds() != null && !dto.getStopIds().isEmpty()) {
             List<BusRouteStopModel> stops = new ArrayList<>();
             int seq = 0;
@@ -66,17 +64,22 @@ public class BusRouteService {
             savedRoute.setStops(stops);
         }
 
-        return BusRouteMapper.toDTO(savedRoute);
+        // Fetch with details and return
+        return routeRepository.findByIdWithDetails(savedRoute.getId())
+                .map(BusRouteMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Failed to load created route"));
     }
 
+    @Transactional(readOnly = true)
     public List<BusRouteResponseDTO> getAll() {
-        return routeRepository.findAll().stream()
+        return routeRepository.findAllWithDetails().stream()
                 .map(BusRouteMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public BusRouteResponseDTO getById(Long id) {
-        return routeRepository.findById(id)
+        return routeRepository.findByIdWithDetails(id)
                 .map(BusRouteMapper::toDTO)
                 .orElse(null);
     }
@@ -105,7 +108,7 @@ public class BusRouteService {
         route.setDriver(driver);
         route.setConductor(conductor);
 
-        // Update stops: delete existing and add new
+        // Update stops: remove old, add new
         if (dto.getStopIds() != null) {
             routeStopRepository.deleteAll(route.getStops());
             route.getStops().clear();
@@ -125,7 +128,10 @@ public class BusRouteService {
         }
 
         BusRouteModel updated = routeRepository.save(route);
-        return BusRouteMapper.toDTO(updated);
+        // Fetch with details for return
+        return routeRepository.findByIdWithDetails(updated.getId())
+                .map(BusRouteMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Failed to load updated route"));
     }
 
     @Transactional

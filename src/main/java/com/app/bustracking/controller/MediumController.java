@@ -13,8 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/mediums")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
-@CrossOrigin(origins = "https://pjsofttech.com")
-//@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class MediumController {
 

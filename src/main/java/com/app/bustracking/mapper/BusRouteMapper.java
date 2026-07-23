@@ -42,26 +42,40 @@ public class BusRouteMapper {
         dto.setStatus(entity.getStatus());
         dto.setCreatedAt(entity.getCreatedAt());
 
+        // Start Stop
         if (entity.getStartStop() != null) {
-            dto.setStartStop(BusStopMapper.toDTO(entity.getStartStop()));
+            dto.setStartStopId(entity.getStartStop().getId());
+            dto.setStartStopName(entity.getStartStop().getStopName());
         }
+        // End Stop
         if (entity.getEndStop() != null) {
-            dto.setEndStop(BusStopMapper.toDTO(entity.getEndStop()));
+            dto.setEndStopId(entity.getEndStop().getId());
+            dto.setEndStopName(entity.getEndStop().getStopName());
         }
+
+        // Bus
         if (entity.getBus() != null) {
-            dto.setBus(BusMapper.toDTO(entity.getBus()));
+            dto.setBusId(entity.getBus().getId());
+            dto.setBusNumber(entity.getBus().getBusNumber());
         }
+        // Driver
         if (entity.getDriver() != null) {
-            dto.setDriver(DriverMapper.toDTO(entity.getDriver()));
+            dto.setDriverId(entity.getDriver().getId());
+            dto.setDriverName(entity.getDriver().getName());
         }
+        // Conductor
         if (entity.getConductor() != null) {
-            dto.setConductor(ConductorMapper.toDTO(entity.getConductor()));
+            dto.setConductorId(entity.getConductor().getId());
+            dto.setConductorName(entity.getConductor().getName());
         }
+
+        // Stops (ordered)
         if (entity.getStops() != null) {
             dto.setStops(entity.getStops().stream()
                     .map(BusRouteStopMapper::toDTO)
                     .collect(Collectors.toList()));
         }
+
         return dto;
     }
 }
