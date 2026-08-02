@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/bus-trips")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
-@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "https://pjsofttech.com/bustracking")
 //@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class BusTripController {

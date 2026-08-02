@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/dashboard")
 //@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
-@CrossOrigin(origins = "https://pjsofttech.com")
+@CrossOrigin(origins = "https://pjsofttech.com/bustracking")
 //@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class DashboardController {
