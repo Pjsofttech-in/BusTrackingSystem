@@ -16,35 +16,23 @@ import java.util.stream.Collectors;
 public class BusRouteService {
 
     private final BusRouteRepository routeRepository;
-    private final BusRepository busRepository;
-    private final DriverRepository driverRepository;
-    private final ConductorRepository conductorRepository;
     private final BusStopRepository busStopRepository;
     private final BusRouteStopRepository routeStopRepository;
 
     public BusRouteService(BusRouteRepository routeRepository,
-                           BusRepository busRepository,
-                           DriverRepository driverRepository,
-                           ConductorRepository conductorRepository,
                            BusStopRepository busStopRepository,
                            BusRouteStopRepository routeStopRepository) {
         this.routeRepository = routeRepository;
-        this.busRepository = busRepository;
-        this.driverRepository = driverRepository;
-        this.conductorRepository = conductorRepository;
         this.busStopRepository = busStopRepository;
         this.routeStopRepository = routeStopRepository;
     }
 
     @Transactional
     public BusRouteResponseDTO create(BusRouteRequestDTO dto) {
-        BusModel bus = dto.getBusId() != null ? busRepository.findById(dto.getBusId()).orElse(null) : null;
-        DriverModel driver = dto.getDriverId() != null ? driverRepository.findById(dto.getDriverId()).orElse(null) : null;
-        ConductorModel conductor = dto.getConductorId() != null ? conductorRepository.findById(dto.getConductorId()).orElse(null) : null;
         BusStopModel startStop = dto.getStartStopId() != null ? busStopRepository.findById(dto.getStartStopId()).orElse(null) : null;
         BusStopModel endStop = dto.getEndStopId() != null ? busStopRepository.findById(dto.getEndStopId()).orElse(null) : null;
 
-        BusRouteModel route = BusRouteMapper.toEntity(dto, bus, driver, conductor, startStop, endStop);
+        BusRouteModel route = BusRouteMapper.toEntity(dto, startStop, endStop);
         BusRouteModel savedRoute = routeRepository.save(route);
 
         // Add stops
@@ -89,9 +77,6 @@ public class BusRouteService {
         BusRouteModel route = routeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Route not found"));
 
-        BusModel bus = dto.getBusId() != null ? busRepository.findById(dto.getBusId()).orElse(null) : null;
-        DriverModel driver = dto.getDriverId() != null ? driverRepository.findById(dto.getDriverId()).orElse(null) : null;
-        ConductorModel conductor = dto.getConductorId() != null ? conductorRepository.findById(dto.getConductorId()).orElse(null) : null;
         BusStopModel startStop = dto.getStartStopId() != null ? busStopRepository.findById(dto.getStartStopId()).orElse(null) : null;
         BusStopModel endStop = dto.getEndStopId() != null ? busStopRepository.findById(dto.getEndStopId()).orElse(null) : null;
 
@@ -104,9 +89,7 @@ public class BusRouteService {
         route.setTotalDistanceKm(dto.getTotalDistanceKm());
         route.setEstimatedTimeMin(dto.getEstimatedTimeMin());
         route.setStatus(dto.getStatus());
-        route.setBus(bus);
-        route.setDriver(driver);
-        route.setConductor(conductor);
+        // ❌ Removed: bus, driver, conductor
 
         // Update stops: remove old, add new
         if (dto.getStopIds() != null) {

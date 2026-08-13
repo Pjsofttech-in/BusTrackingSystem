@@ -14,7 +14,7 @@ public class ConductorMapper {
         entity.setPassword(dto.getPassword());
         entity.setLicenseNumber(dto.getLicenseNumber());
         entity.setIdCard(dto.getIdCard());
-        entity.setLicenseType(dto.getLicenseType());
+
         entity.setLicensePhoto(dto.getLicensePhoto());
         entity.setConductorPhoto(dto.getConductorPhoto());
         entity.setLicenseExpiryDate(dto.getLicenseExpiryDate());
@@ -38,7 +38,7 @@ public class ConductorMapper {
         dto.setEmail(entity.getEmail());
         dto.setLicenseNumber(entity.getLicenseNumber());
         dto.setIdCard(entity.getIdCard());
-        dto.setLicenseType(entity.getLicenseType());
+
         dto.setLicensePhoto(entity.getLicensePhoto());
         dto.setConductorPhoto(entity.getConductorPhoto());
         dto.setLicenseExpiryDate(entity.getLicenseExpiryDate());

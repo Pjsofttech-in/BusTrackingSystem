@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 public class BusRouteMapper {
 
     public static BusRouteModel toEntity(BusRouteRequestDTO dto,
-                                         BusModel bus,
-                                         DriverModel driver,
-                                         ConductorModel conductor,
                                          BusStopModel startStop,
                                          BusStopModel endStop) {
         BusRouteModel entity = new BusRouteModel();
@@ -24,9 +21,7 @@ public class BusRouteMapper {
         entity.setTotalDistanceKm(dto.getTotalDistanceKm());
         entity.setEstimatedTimeMin(dto.getEstimatedTimeMin());
         entity.setStatus(dto.getStatus());
-        entity.setBus(bus);
-        entity.setDriver(driver);
-        entity.setConductor(conductor);
+        // ❌ Removed: bus, driver, conductor
         return entity;
     }
 
@@ -53,21 +48,7 @@ public class BusRouteMapper {
             dto.setEndStopName(entity.getEndStop().getStopName());
         }
 
-        // Bus
-        if (entity.getBus() != null) {
-            dto.setBusId(entity.getBus().getId());
-            dto.setBusNumber(entity.getBus().getBusNumber());
-        }
-        // Driver
-        if (entity.getDriver() != null) {
-            dto.setDriverId(entity.getDriver().getId());
-            dto.setDriverName(entity.getDriver().getName());
-        }
-        // Conductor
-        if (entity.getConductor() != null) {
-            dto.setConductorId(entity.getConductor().getId());
-            dto.setConductorName(entity.getConductor().getName());
-        }
+        // ❌ Removed: bus, driver, conductor mapping
 
         // Stops (ordered)
         if (entity.getStops() != null) {

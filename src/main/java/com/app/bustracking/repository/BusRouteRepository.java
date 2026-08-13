@@ -13,9 +13,6 @@ import java.util.Optional;
 public interface BusRouteRepository extends JpaRepository<BusRouteModel, Long> {
 
     @Query("SELECT r FROM BusRouteModel r " +
-            "JOIN FETCH r.bus b " +
-            "JOIN FETCH r.driver d " +
-            "JOIN FETCH r.conductor c " +
             "JOIN FETCH r.startStop ss " +
             "JOIN FETCH r.endStop es " +
             "LEFT JOIN FETCH r.stops stops " +
@@ -23,9 +20,6 @@ public interface BusRouteRepository extends JpaRepository<BusRouteModel, Long> {
     List<BusRouteModel> findAllWithDetails();
 
     @Query("SELECT r FROM BusRouteModel r " +
-            "JOIN FETCH r.bus b " +
-            "JOIN FETCH r.driver d " +
-            "JOIN FETCH r.conductor c " +
             "JOIN FETCH r.startStop ss " +
             "JOIN FETCH r.endStop es " +
             "LEFT JOIN FETCH r.stops stops " +

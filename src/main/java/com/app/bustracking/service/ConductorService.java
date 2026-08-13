@@ -53,7 +53,7 @@ public class ConductorService {
         conductor.setEmail(dto.getEmail());
         conductor.setLicenseNumber(dto.getLicenseNumber());
         conductor.setIdCard(dto.getIdCard());
-        conductor.setLicenseType(dto.getLicenseType());
+
         conductor.setLicensePhoto(dto.getLicensePhoto());
         conductor.setConductorPhoto(dto.getConductorPhoto());
         conductor.setLicenseExpiryDate(dto.getLicenseExpiryDate());

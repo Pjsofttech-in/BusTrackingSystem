@@ -46,9 +46,9 @@ public class ServiceProviderService {
         entity.setServiceprovidername(dto.getServiceprovidername());
         entity.setEmail(dto.getEmail());
         entity.setMobile(dto.getMobile());
-        entity.setCity(dto.getCity());
-        entity.setState(dto.getState());
-        entity.setPincode(dto.getPincode());
+        entity.setRegistrationNumber(dto.getRegistrationNumber());
+        entity.setAddress(dto.getAddress());
+        entity.setStatus(dto.getStatus() != null ? dto.getStatus() : entity.getStatus());
         ServiceProviderModel updated = repository.save(entity);
         return ServiceProviderMapper.toDTO(updated);
     }

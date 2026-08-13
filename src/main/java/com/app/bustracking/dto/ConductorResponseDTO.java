@@ -14,7 +14,7 @@ public class ConductorResponseDTO {
     private String email;
     private String licenseNumber;
     private String idCard;
-    private String licenseType;
+
     private String licensePhoto;
     private String conductorPhoto;
     private LocalDate licenseExpiryDate;
@@ -77,13 +77,7 @@ public class ConductorResponseDTO {
         this.idCard = idCard;
     }
 
-    public String getLicenseType() {
-        return licenseType;
-    }
 
-    public void setLicenseType(String licenseType) {
-        this.licenseType = licenseType;
-    }
 
     public String getLicensePhoto() {
         return licensePhoto;

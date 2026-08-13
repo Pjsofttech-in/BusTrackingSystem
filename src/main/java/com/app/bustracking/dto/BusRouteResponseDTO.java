@@ -25,13 +25,7 @@ public class BusRouteResponseDTO {
     private Integer estimatedTimeMin;
     private String status;
 
-    // Bus, Driver, Conductor details
-    private Long busId;
-    private String busNumber;
-    private Long driverId;
-    private String driverName;
-    private Long conductorId;
-    private String conductorName;
+    // ❌ Removed: busId, busNumber, driverId, driverName, conductorId, conductorName
 
     private List<BusRouteStopResponseDTO> stops;
     private LocalDateTime createdAt;
