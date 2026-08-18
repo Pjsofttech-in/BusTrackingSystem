@@ -17,6 +17,14 @@ public class BusTripResponseDTO {
     private String tripStatus;
     private LocalDateTime createdAt;
 
+    // ✅ NEW: ID fields for easy reference
+    private Long busId;
+    private Long routeId;
+    private Long driverId;
+    private Long conductorId;
+
+    // ... existing getters and setters (or use Lombok)
+
     public Long getId() {
         return id;
     }
@@ -87,5 +95,37 @@ public class BusTripResponseDTO {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Long busId) {
+        this.busId = busId;
+    }
+
+    public Long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Long routeId) {
+        this.routeId = routeId;
+    }
+
+    public Long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
+    }
+
+    public Long getConductorId() {
+        return conductorId;
+    }
+
+    public void setConductorId(Long conductorId) {
+        this.conductorId = conductorId;
     }
 }

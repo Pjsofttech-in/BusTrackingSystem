@@ -30,6 +30,13 @@ public class BusTripMapper {
         dto.setTripStatus(entity.getTripStatus());
         dto.setCreatedAt(entity.getCreatedAt());
 
+        // ✅ Set ID fields (null‑safe)
+        dto.setBusId(entity.getBus() != null ? entity.getBus().getId() : null);
+        dto.setRouteId(entity.getRoute() != null ? entity.getRoute().getId() : null);
+        dto.setDriverId(entity.getDriver() != null ? entity.getDriver().getId() : null);
+        dto.setConductorId(entity.getConductor() != null ? entity.getConductor().getId() : null);
+
+        // Map nested objects
         if (entity.getBus() != null) {
             dto.setBus(BusMapper.toDTO(entity.getBus()));
         }
