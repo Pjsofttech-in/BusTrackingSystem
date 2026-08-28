@@ -22,4 +22,5 @@ public class StudentRequestDTO {
     private String division;
     private String medium;
     private String academicYear;
+    private Long routeId;   // NEW
 }

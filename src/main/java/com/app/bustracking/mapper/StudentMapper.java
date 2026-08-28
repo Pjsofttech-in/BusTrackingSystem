@@ -2,11 +2,12 @@ package com.app.bustracking.mapper;
 
 import com.app.bustracking.dto.StudentRequestDTO;
 import com.app.bustracking.dto.StudentResponseDTO;
+import com.app.bustracking.model.BusRouteModel;
 import com.app.bustracking.model.StudentModel;
 
 public class StudentMapper {
 
-    public static StudentModel toEntity(StudentRequestDTO dto) {
+    public static StudentModel toEntity(StudentRequestDTO dto, BusRouteModel route) {
         StudentModel entity = new StudentModel();
         entity.setName(dto.getName());
         entity.setRollNumber(dto.getRollNumber());
@@ -24,6 +25,7 @@ public class StudentMapper {
         entity.setDivision(dto.getDivision());
         entity.setMedium(dto.getMedium());
         entity.setAcademicYear(dto.getAcademicYear());
+        entity.setRoute(route);
         return entity;
     }
 
@@ -46,7 +48,12 @@ public class StudentMapper {
         dto.setDivision(entity.getDivision());
         dto.setMedium(entity.getMedium());
         dto.setAcademicYear(entity.getAcademicYear());
-        // optionally map payments and scans if needed
+
+        if (entity.getRoute() != null) {
+            dto.setRouteId(entity.getRoute().getId());
+            dto.setRouteName(entity.getRoute().getRouteName());
+        }
+
         return dto;
     }
 }

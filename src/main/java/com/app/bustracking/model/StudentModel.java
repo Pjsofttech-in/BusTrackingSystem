@@ -40,6 +40,10 @@ public class StudentModel {
     private String medium;
     private String academicYear;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
+    private BusRouteModel route;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentFeePaymentModel> payments = new ArrayList<>();
 

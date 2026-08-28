@@ -2,7 +2,6 @@ package com.app.bustracking.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,10 +23,10 @@ public class StudentResponseDTO {
     private String division;
     private String medium;
     private String academicYear;
-    // Optionally include payments and scans summaries
-    // private List<StudentFeePaymentResponseDTO> payments;
-    // private List<StudentScanResponseDTO> scans;
 
+    // NEW
+    private Long routeId;
+    private String routeName;
 
     public Long getId() {
         return id;
@@ -163,5 +162,21 @@ public class StudentResponseDTO {
 
     public void setAcademicYear(String academicYear) {
         this.academicYear = academicYear;
+    }
+
+    public Long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Long routeId) {
+        this.routeId = routeId;
+    }
+
+    public String getRouteName() {
+        return routeName;
+    }
+
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 }

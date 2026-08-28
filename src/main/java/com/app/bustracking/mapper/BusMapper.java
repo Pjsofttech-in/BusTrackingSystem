@@ -31,13 +31,16 @@ public class BusMapper {
         dto.setCreatedAt(bus.getCreatedAt());
         dto.setUpdatedAt(bus.getUpdatedAt());
 
-        // ✅ Set service provider details
+        // Set service provider details (both ID/name and full object)
         if (bus.getServiceProvider() != null) {
             dto.setServiceProviderId(bus.getServiceProvider().getId());
             dto.setServiceProviderName(bus.getServiceProvider().getServiceprovidername());
+            // ✅ Map full service provider object
+            dto.setServiceProvider(ServiceProviderMapper.toDTO(bus.getServiceProvider()));
         } else {
             dto.setServiceProviderId(null);
             dto.setServiceProviderName(null);
+            dto.setServiceProvider(null);
         }
 
         return dto;
