@@ -13,8 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/fee-structures")
-//@CrossOrigin(origins = "https://pjsofttech.com/bustracking")
-@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class FeeStructureController {
 

@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bus-routes")
-@CrossOrigin(origins = "https://pjsofttech.com/bustracking")
 @RequiredArgsConstructor
 public class BusRouteController {
 
