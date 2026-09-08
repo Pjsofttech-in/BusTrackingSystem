@@ -35,17 +35,7 @@ public class BusRouteModel {
     private Integer estimatedTimeMin;
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "bus_id")
-    private BusModel bus;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    private DriverModel driver;
-
-    @ManyToOne
-    @JoinColumn(name = "conductor_id")
-    private ConductorModel conductor;
+    // ❌ Removed: bus, driver, conductor
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("sequence ASC")

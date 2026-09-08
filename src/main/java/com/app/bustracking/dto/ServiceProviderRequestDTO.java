@@ -9,7 +9,7 @@ public class ServiceProviderRequestDTO {
     private String serviceprovidername;
     private String email;
     private String mobile;
-    private String city;
-    private String state;
-    private String pincode;
+    private String registrationNumber;
+    private String address;
+    private String status;  // optional, defaults to ACTIVE
 }

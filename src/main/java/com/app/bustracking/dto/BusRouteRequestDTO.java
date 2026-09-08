@@ -17,8 +17,6 @@ public class BusRouteRequestDTO {
     private Double totalDistanceKm;
     private Integer estimatedTimeMin;
     private String status;
-    private Long busId;
-    private Long driverId;
-    private Long conductorId;
+    // ❌ Removed: busId, driverId, conductorId
     private List<Long> stopIds;   // ordered list of stop IDs
 }

@@ -1,3 +1,4 @@
+// src/main/java/com/app/bustracking/model/StudentModel.java
 package com.app.bustracking.model;
 
 import jakarta.persistence.*;
@@ -39,6 +40,13 @@ public class StudentModel {
     private String division;
     private String medium;
     private String academicYear;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
+    private BusRouteModel route;
+
+    // ✅ NEW: password field for login
+    private String password;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentFeePaymentModel> payments = new ArrayList<>();

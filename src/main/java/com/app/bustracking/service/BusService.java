@@ -24,6 +24,21 @@ public class BusService {
         this.serviceProviderRepository = serviceProviderRepository;
     }
 
+    @Transactional(readOnly = true)
+    public List<BusResponseDTO> getAll() {
+        // ✅ Use the join-fetch method to load service provider
+        return busRepository.findAllWithProvider().stream()
+                .map(BusMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public BusResponseDTO getById(Long id) {
+        return busRepository.findByIdWithProvider(id)
+                .map(BusMapper::toDTO)
+                .orElse(null);
+    }
+
     @Transactional
     public BusResponseDTO create(BusRequestDTO dto) {
         ServiceProviderModel serviceProvider = null;
@@ -33,24 +48,15 @@ public class BusService {
         }
         BusModel bus = BusMapper.toEntity(dto, serviceProvider);
         BusModel saved = busRepository.save(bus);
-        return BusMapper.toDTO(saved);
-    }
-
-    public List<BusResponseDTO> getAll() {
-        return busRepository.findAll().stream()
+        // After saving, fetch with provider to return complete DTO
+        return busRepository.findByIdWithProvider(saved.getId())
                 .map(BusMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    public BusResponseDTO getById(Long id) {
-        return busRepository.findById(id)
-                .map(BusMapper::toDTO)
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("Failed to load saved bus"));
     }
 
     @Transactional
     public BusResponseDTO update(Long id, BusRequestDTO dto) {
-        BusModel bus = busRepository.findById(id)
+        BusModel bus = busRepository.findByIdWithProvider(id)
                 .orElseThrow(() -> new RuntimeException("Bus not found"));
         ServiceProviderModel serviceProvider = null;
         if (dto.getServiceProviderId() != null) {

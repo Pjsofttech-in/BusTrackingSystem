@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 public class BusRouteMapper {
 
     public static BusRouteModel toEntity(BusRouteRequestDTO dto,
-                                         BusModel bus,
-                                         DriverModel driver,
-                                         ConductorModel conductor,
                                          BusStopModel startStop,
                                          BusStopModel endStop) {
         BusRouteModel entity = new BusRouteModel();
@@ -24,9 +21,7 @@ public class BusRouteMapper {
         entity.setTotalDistanceKm(dto.getTotalDistanceKm());
         entity.setEstimatedTimeMin(dto.getEstimatedTimeMin());
         entity.setStatus(dto.getStatus());
-        entity.setBus(bus);
-        entity.setDriver(driver);
-        entity.setConductor(conductor);
+        // ❌ Removed: bus, driver, conductor
         return entity;
     }
 
@@ -42,26 +37,26 @@ public class BusRouteMapper {
         dto.setStatus(entity.getStatus());
         dto.setCreatedAt(entity.getCreatedAt());
 
+        // Start Stop
         if (entity.getStartStop() != null) {
-            dto.setStartStop(BusStopMapper.toDTO(entity.getStartStop()));
+            dto.setStartStopId(entity.getStartStop().getId());
+            dto.setStartStopName(entity.getStartStop().getStopName());
         }
+        // End Stop
         if (entity.getEndStop() != null) {
-            dto.setEndStop(BusStopMapper.toDTO(entity.getEndStop()));
+            dto.setEndStopId(entity.getEndStop().getId());
+            dto.setEndStopName(entity.getEndStop().getStopName());
         }
-        if (entity.getBus() != null) {
-            dto.setBus(BusMapper.toDTO(entity.getBus()));
-        }
-        if (entity.getDriver() != null) {
-            dto.setDriver(DriverMapper.toDTO(entity.getDriver()));
-        }
-        if (entity.getConductor() != null) {
-            dto.setConductor(ConductorMapper.toDTO(entity.getConductor()));
-        }
+
+        // ❌ Removed: bus, driver, conductor mapping
+
+        // Stops (ordered)
         if (entity.getStops() != null) {
             dto.setStops(entity.getStops().stream()
                     .map(BusRouteStopMapper::toDTO)
                     .collect(Collectors.toList()));
         }
+
         return dto;
     }
 }

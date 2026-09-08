@@ -12,9 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bus")
-//@CrossOrigin(origins = "https://pjsofttech.com", originPatterns = "http://localhost:5173")
-@CrossOrigin(origins = "https://pjsofttech.com")
-//@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://pjsofttech.com/bustracking", originPatterns = "http://localhost:5173")
 @RequiredArgsConstructor
 public class BusController {
 
@@ -29,6 +27,7 @@ public class BusController {
     public ResponseEntity<BusResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(busService.getById(id));
     }
+
 
     @PostMapping
     public ResponseEntity<BusResponseDTO> create(@RequestBody BusRequestDTO request) {

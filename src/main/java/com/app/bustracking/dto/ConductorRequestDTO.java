@@ -13,7 +13,7 @@ public class ConductorRequestDTO {
     private String password;
     private String licenseNumber;
     private String idCard;
-    private String licenseType;
+
     private String licensePhoto;
     private String conductorPhoto;
     private LocalDate licenseExpiryDate;

@@ -26,7 +26,6 @@ public class ConductorModel {
     @Column(columnDefinition = "LONGTEXT")
     private String idCard;
 
-    private String licenseType;
 
     @Lob
     @Column(columnDefinition = "LONGTEXT")

@@ -11,9 +11,9 @@ public class ServiceProviderMapper {
         entity.setServiceprovidername(dto.getServiceprovidername());
         entity.setEmail(dto.getEmail());
         entity.setMobile(dto.getMobile());
-        entity.setCity(dto.getCity());
-        entity.setState(dto.getState());
-        entity.setPincode(dto.getPincode());
+        entity.setRegistrationNumber(dto.getRegistrationNumber());
+        entity.setAddress(dto.getAddress());
+        entity.setStatus(dto.getStatus() != null ? dto.getStatus() : "ACTIVE");
         return entity;
     }
 
@@ -23,9 +23,9 @@ public class ServiceProviderMapper {
         dto.setServiceprovidername(entity.getServiceprovidername());
         dto.setEmail(entity.getEmail());
         dto.setMobile(entity.getMobile());
-        dto.setCity(entity.getCity());
-        dto.setState(entity.getState());
-        dto.setPincode(entity.getPincode());
+        dto.setRegistrationNumber(entity.getRegistrationNumber());
+        dto.setAddress(entity.getAddress());
+        dto.setStatus(entity.getStatus());
         return dto;
     }
 }

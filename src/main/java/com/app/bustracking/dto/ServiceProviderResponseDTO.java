@@ -10,9 +10,9 @@ public class ServiceProviderResponseDTO {
     private String serviceprovidername;
     private String email;
     private String mobile;
-    private String city;
-    private String state;
-    private String pincode;
+    private String registrationNumber;
+    private String address;
+    private String status;
 
     public Long getId() {
         return id;
@@ -46,27 +46,27 @@ public class ServiceProviderResponseDTO {
         this.mobile = mobile;
     }
 
-    public String getCity() {
-        return city;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
-    public String getState() {
-        return state;
+    public String getAddress() {
+        return address;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getPincode() {
-        return pincode;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
