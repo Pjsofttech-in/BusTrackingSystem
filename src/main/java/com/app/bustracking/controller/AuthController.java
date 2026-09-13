@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "https://pjsofttech.com/bustracking", originPatterns = "http://localhost:5173")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

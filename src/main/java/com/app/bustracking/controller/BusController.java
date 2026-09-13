@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bus")
-@CrossOrigin(origins = "https://pjsofttech.com/bustracking", originPatterns = "http://localhost:5173")
 @RequiredArgsConstructor
 public class BusController {
 
