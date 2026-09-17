@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity   // enables @PreAuthorize
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final UserService userService;
@@ -52,56 +52,51 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // ✅ Disable CSRF — we use JWT (stateless)
                 .csrf(AbstractHttpConfigurer::disable)
-
-                // ✅ Enable CORS — delegates to CorsConfig bean
                 .cors(Customizer.withDefaults())
-
-                // ✅ Route-level authorization
                 .authorizeHttpRequests(auth -> auth
-                        // CORS preflight — always allow
+                        // ─── Public auth endpoints ─────────────────────────────
+                        .requestMatchers(
+                                "/api/auth/login",
+                                "/api/auth/register",
+                                "/api/auth/logout"
+                        ).permitAll()
+
+                        // ─── CORS preflight ─────────────────────────────────────
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // Public auth endpoints
-                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                        // ─── Static resources (in case anything is served by Boot)
+                        .requestMatchers(
+                                "/", "/index.html", "/error",
+                                "/assets/**",
+                                "/static/**",
+                                "/favicon.ico",
+                                "/vite.svg",
+                                "/*.css", "/*.js", "/*.mjs",
+                                "/*.png", "/*.jpg", "/*.jpeg", "/*.gif",
+                                "/*.svg", "/*.ico", "/*.webp", "/*.avif",
+                                "/*.woff", "/*.woff2", "/*.ttf", "/*.eot", "/*.map"
+                        ).permitAll()
 
-                        // Public health / static (optional — remove if not needed)
-                        .requestMatchers("/error", "/actuator/health").permitAll()
-
-                        // Everything else requires a valid JWT
+                        // ─── Everything else needs a valid JWT ──────────────────
                         .anyRequest().authenticated()
                 )
-
-                // ✅ Stateless session — no cookies
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // ✅ Distinguish 401 (no/invalid token) from 403 (wrong role)
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             res.setContentType("application/json");
-                            res.setCharacterEncoding("UTF-8");
-                            res.getWriter().write(
-                                    "{\"error\":\"Unauthorized - missing or invalid token\",\"status\":401}"
-                            );
+                            res.getWriter().write("{\"error\":\"Unauthorized - missing or invalid token\"}");
                         })
                         .accessDeniedHandler((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             res.setContentType("application/json");
-                            res.setCharacterEncoding("UTF-8");
-                            res.getWriter().write(
-                                    "{\"error\":\"Access denied - insufficient role\",\"status\":403}"
-                            );
+                            res.getWriter().write("{\"error\":\"Access denied - insufficient role\"}");
                         })
                 )
 
-                // ✅ Register authentication provider
-                .authenticationProvider(authenticationProvider())
-
-                // ✅ JWT filter runs before the username/password filter
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
