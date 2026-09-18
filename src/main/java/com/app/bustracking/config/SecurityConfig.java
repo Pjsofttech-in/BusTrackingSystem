@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity   // enables @PreAuthorize on controllers
 public class SecurityConfig {
 
     private final UserService userService;
@@ -36,67 +36,113 @@ public class SecurityConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Authentication provider (DaoAuthenticationProvider)
+    //  Uses UserService (UserDetailsService) + BCrypt encoder.
+    // ─────────────────────────────────────────────────────────────
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return authProvider;
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userService);
+        provider.setPasswordEncoder(passwordEncoder);
+        // Uncomment if you ever add an "enabled" flag on UserModel:
+        // provider.setHideUserNotFoundExceptions(true);
+        return provider;
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  AuthenticationManager (exposed so AuthController can inject it)
+    // ─────────────────────────────────────────────────────────────
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig)
+            throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
+    // ─────────────────────────────────────────────────────────────
+    //  Main security filter chain
+    // ─────────────────────────────────────────────────────────────
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
+                // Stateless REST API — no CSRF, no sessions
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
+
+                // ✅ Explicitly register our DaoAuthenticationProvider so that
+                //    AuthenticationManager.authenticate(...) uses it.
+                .authenticationProvider(authenticationProvider())
+
+                // ─── URL authorization rules ─────────────────────────
                 .authorizeHttpRequests(auth -> auth
-                        // ─── Public auth endpoints ─────────────────────────────
+
+                        // Public auth endpoints
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register",
                                 "/api/auth/logout"
                         ).permitAll()
 
-                        // ─── CORS preflight ─────────────────────────────────────
+                        // CORS preflight must always be allowed
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // ─── Static resources (in case anything is served by Boot)
+                        // Static assets — whitelisted in case Spring ever serves them
+                        // (normally nginx does, but this stops 401→application/json
+                        //  MIME errors if anything slips through)
                         .requestMatchers(
-                                "/", "/index.html", "/error",
+                                "/",
+                                "/index.html",
+                                "/error",
                                 "/assets/**",
                                 "/static/**",
                                 "/favicon.ico",
                                 "/vite.svg",
-                                "/*.css", "/*.js", "/*.mjs",
-                                "/*.png", "/*.jpg", "/*.jpeg", "/*.gif",
-                                "/*.svg", "/*.ico", "/*.webp", "/*.avif",
-                                "/*.woff", "/*.woff2", "/*.ttf", "/*.eot", "/*.map"
+                                "/*.css",
+                                "/*.js",
+                                "/*.mjs",
+                                "/*.png",
+                                "/*.jpg",
+                                "/*.jpeg",
+                                "/*.gif",
+                                "/*.svg",
+                                "/*.ico",
+                                "/*.webp",
+                                "/*.avif",
+                                "/*.woff",
+                                "/*.woff2",
+                                "/*.ttf",
+                                "/*.eot",
+                                "/*.map"
                         ).permitAll()
 
-                        // ─── Everything else needs a valid JWT ──────────────────
+                        // Everything else requires a valid JWT
                         .anyRequest().authenticated()
                 )
+
+                // Stateless — no HTTP session, no JSESSIONID
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
+                // JSON 401 / 403 responses instead of Spring's default HTML
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             res.setContentType("application/json");
-                            res.getWriter().write("{\"error\":\"Unauthorized - missing or invalid token\"}");
+                            res.getWriter().write(
+                                    "{\"error\":\"Unauthorized - missing or invalid token\"}"
+                            );
                         })
                         .accessDeniedHandler((req, res, e) -> {
                             res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             res.setContentType("application/json");
-                            res.getWriter().write("{\"error\":\"Access denied - insufficient role\"}");
+                            res.getWriter().write(
+                                    "{\"error\":\"Access denied - insufficient role\"}"
+                            );
                         })
                 )
 
+                // Plug the JWT filter in before UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
